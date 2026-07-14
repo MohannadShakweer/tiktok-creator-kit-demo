@@ -1,0 +1,1939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TikTok Creator Kit — Free Demo</title>
+<meta name="description" content="Free demo of the TikTok Creator Kit. Sample hooks, AI prompts, scripts, hashtags, and more.">
+<style>
+/* ============ RESET & BASE ============ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, Helvetica, Arial, sans-serif;
+  color: #e4e4e7;
+  background: #0a0a0b;
+  line-height: 1.6;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+input { font-family: inherit; }
+
+/* ============ SCROLLBAR ============ */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #18181b; }
+::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: #52525b; }
+
+/* ============ LAYOUT ============ */
+.app {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+/* ============ SIDEBAR ============ */
+.sidebar {
+  background: #111113;
+  border-right: 1px solid #1f1f23;
+  padding: 24px 16px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 700; font-size: 16px;
+  color: #fff;
+  margin-bottom: 32px;
+  padding: 0 8px;
+}
+.logo-mark {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, #FE2C55, #25F4EE);
+  border-radius: 8px;
+  display: grid; place-items: center;
+  color: #fff; font-size: 13px; font-weight: 800;
+}
+.demo-badge {
+  display: inline-block;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.08em;
+  background: rgba(254,44,85,0.15);
+  color: #FE2C55;
+  padding: 3px 8px; border-radius: 999px;
+  margin-left: auto;
+}
+.nav-section {
+  margin-bottom: 8px;
+}
+.nav-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #52525b;
+  padding: 12px 12px 8px;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #a1a1aa;
+  cursor: pointer;
+  transition: all .15s;
+  font-weight: 500;
+  width: 100%;
+  text-align: left;
+}
+.nav-item:hover {
+  background: #18181b;
+  color: #fff;
+}
+.nav-item.active {
+  background: linear-gradient(135deg, rgba(254,44,85,0.15), rgba(37,244,238,0.1));
+  color: #fff;
+  border: 1px solid rgba(254,44,85,0.3);
+}
+.nav-item .icon {
+  font-size: 16px;
+  width: 20px; text-align: center;
+}
+.nav-item .count {
+  margin-left: auto;
+  font-size: 11px;
+  color: #52525b;
+  background: #18181b;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+.nav-item.active .count {
+  background: rgba(254,44,85,0.2);
+  color: #FE2C55;
+}
+
+.upgrade-card {
+  margin-top: 16px;
+  padding: 18px;
+  background: linear-gradient(135deg, rgba(254,44,85,0.15), rgba(37,244,238,0.08));
+  border: 2px solid rgba(254,44,85,0.4);
+  border-radius: 14px;
+  text-align: center;
+  position: relative;
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(254,44,85,0); }
+  50% { box-shadow: 0 0 20px 2px rgba(254,44,85,0.2); }
+}
+.upgrade-card h4 {
+  font-size: 14px; font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.upgrade-card .upgrade-emoji {
+  font-size: 28px;
+  margin-bottom: 6px;
+  display: block;
+}
+.upgrade-card p {
+  font-size: 12px;
+  color: #d4d4d8;
+  margin-bottom: 14px;
+  line-height: 1.45;
+}
+.upgrade-card .price-tag {
+  display: inline-block;
+  background: #fff;
+  color: #FE2C55;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+.upgrade-btn {
+  display: block;
+  width: 100%;
+  background: linear-gradient(135deg, #FE2C55, #ff406b);
+  color: #fff;
+  font-size: 13px; font-weight: 800;
+  padding: 12px 12px;
+  border-radius: 10px;
+  text-align: center;
+  transition: transform .15s, box-shadow .2s;
+  box-shadow: 0 4px 12px rgba(254,44,85,0.3);
+  position: relative;
+}
+.upgrade-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(254,44,85,0.4);
+}
+.upgrade-arrow {
+  position: absolute;
+  top: -8px; right: 10px;
+  font-size: 24px;
+  animation: bounce 1.5s infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* ============ MAIN ============ */
+.main {
+  padding: 32px 40px;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+@media (max-width: 1024px) {
+  .main { padding: 24px 20px; }
+}
+
+.main-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 24px;
+  flex-wrap: wrap; gap: 16px;
+}
+.main-title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.main-subtitle {
+  font-size: 14px;
+  color: #71717a;
+}
+.demo-watermark {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(254,44,85,0.1);
+  border: 1px solid rgba(254,44,85,0.3);
+  color: #FE2C55;
+  font-size: 12px; font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+
+/* ============ SEARCH ============ */
+.search-bar {
+  position: relative;
+  margin-bottom: 20px;
+  max-width: 500px;
+}
+.search-bar input {
+  width: 100%;
+  background: #18181b;
+  border: 1px solid #27272a;
+  color: #fff;
+  padding: 12px 16px 12px 44px;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color .2s;
+}
+.search-bar input:focus { border-color: #FE2C55; }
+.search-bar input::placeholder { color: #52525b; }
+.search-bar .search-icon {
+  position: absolute;
+  left: 14px; top: 50%;
+  transform: translateY(-50%);
+  color: #52525b;
+  font-size: 16px;
+}
+
+/* ============ FILTERS ============ */
+.filters {
+  display: flex; gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.filter-chip {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #18181b;
+  border: 1px solid #27272a;
+  color: #a1a1aa;
+  cursor: pointer;
+  transition: all .15s;
+}
+.filter-chip:hover { color: #fff; border-color: #52525b; }
+.filter-chip.active {
+  background: #FE2C55;
+  border-color: #FE2C55;
+  color: #fff;
+}
+
+/* ============ CONTENT GRID ============ */
+.content-grid {
+  display: grid;
+  gap: 12px;
+}
+.content-item {
+  background: #18181b;
+  border: 1px solid #27272a;
+  border-radius: 12px;
+  padding: 16px 20px;
+  transition: all .2s;
+  position: relative;
+}
+.content-item:hover {
+  border-color: #FE2C55;
+  transform: translateY(-1px);
+}
+.content-item .item-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.content-item .item-text {
+  flex: 1;
+  color: #e4e4e7;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.content-item .item-text.long {
+  white-space: pre-wrap;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 12.5px;
+  background: #0a0a0b;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #27272a;
+  margin-top: 8px;
+}
+.content-item .item-meta {
+  font-size: 11px;
+  color: #71717a;
+  margin-bottom: 8px;
+  display: flex; gap: 12px;
+  flex-wrap: wrap;
+}
+.content-item .tag {
+  background: rgba(37,244,238,0.1);
+  color: #25F4EE;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.content-item .tag.pink { background: rgba(254,44,85,0.1); color: #FE2C55; }
+.content-item .tag.gold { background: rgba(250,204,21,0.1); color: #facc15; }
+.content-item .tag.green { background: rgba(34,197,94,0.1); color: #22c55e; }
+.content-item .tag.purple { background: rgba(168,85,247,0.1); color: #a855f7; }
+
+.copy-btn {
+  flex-shrink: 0;
+  background: rgba(37,244,238,0.1);
+  border: 1px solid rgba(37,244,238,0.3);
+  color: #25F4EE;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all .15s;
+}
+.copy-btn:hover {
+  background: rgba(37,244,238,0.2);
+  transform: scale(1.05);
+}
+.copy-btn.copied {
+  background: rgba(34,197,94,0.15);
+  border-color: rgba(34,197,94,0.4);
+  color: #22c55e;
+}
+
+/* ============ EMPTY STATE ============ */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #71717a;
+}
+.empty-state .icon { font-size: 48px; margin-bottom: 16px; }
+.empty-state h3 { font-size: 18px; color: #a1a1aa; margin-bottom: 8px; }
+.empty-state p { font-size: 14px; }
+
+/* ============ TOAST ============ */
+.toast {
+  position: fixed;
+  bottom: 24px; left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #FE2C55, #25F4EE);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 9999;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  animation: slideUp .3s ease;
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translate(-50%, 20px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* ============ MOBILE ============ */
+.mobile-header {
+  display: none;
+  background: #111113;
+  border-bottom: 1px solid #1f1f23;
+  padding: 12px 16px;
+  position: sticky; top: 0; z-index: 50;
+}
+.mobile-header .logo { margin: 0; }
+.mobile-menu-btn {
+  background: #18181b;
+  border: 1px solid #27272a;
+  color: #fff;
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  font-size: 18px;
+  display: grid; place-items: center;
+}
+
+@media (max-width: 768px) {
+  .app { grid-template-columns: 1fr; }
+  .sidebar {
+    position: fixed;
+    top: 0; left: -280px;
+    width: 280px;
+    z-index: 100;
+    transition: left .3s;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.4);
+  }
+  .sidebar.open { left: 0; }
+  .mobile-header { display: flex; justify-content: space-between; align-items: center; }
+  .main { padding: 20px 16px; }
+  .main-title { font-size: 22px; }
+}
+
+/* ============ TOP BAR (mobile back) ============ */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 90;
+}
+.overlay.show { display: block; }
+
+/* ============ STAT BAR ============ */
+.stat-bar {
+  display: flex; gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.stat-pill {
+  background: #18181b;
+  border: 1px solid #27272a;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: #a1a1aa;
+}
+.stat-pill strong { color: #fff; font-weight: 700; }
+.stat-pill.accent { color: #25F4EE; border-color: rgba(37,244,238,0.3); }
+</style>
+</head>
+<body>
+
+<!-- Mobile header -->
+<div class="mobile-header">
+  <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+  <div class="logo">
+    <span class="logo-mark">TK</span>
+    <span>TikTok Creator Kit</span>
+    <span class="demo-badge">DEMO</span>
+  </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+<div class="app">
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="logo">
+      <span class="logo-mark">TK</span>
+      <span>TikTok Creator Kit</span>
+      <span class="demo-badge">DEMO</span>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Content</div>
+      <button class="nav-item active" data-section="hooks">
+        <span class="icon">🪝</span> Hooks <span class="count">30 <span style="color:#52525b;">/ 302</span></span>
+      </button>
+      <button class="nav-item" data-section="prompts">
+        <span class="icon">🤖</span> AI Prompts <span class="count">18 <span style="color:#52525b;">/ 150</span></span>
+      </button>
+      <button class="nav-item" data-section="scripts">
+        <span class="icon">🎬</span> Scripts <span class="count">5 <span style="color:#52525b;">/ 40</span></span>
+      </button>
+      <button class="nav-item" data-section="ideas">
+        <span class="icon">💡</span> Ideas <span class="count">24 <span style="color:#52525b;">/ 200</span></span>
+      </button>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Optimization</div>
+      <button class="nav-item" data-section="hashtags">
+        <span class="icon">#</span> Hashtags <span class="count">30 <span style="color:#52525b;">/ 497</span></span>
+      </button>
+      <button class="nav-item" data-section="formulas">
+        <span class="icon">📝</span> Title Formulas <span class="count">8 <span style="color:#52525b;">/ 75</span></span>
+      </button>
+      <button class="nav-item" data-section="bios">
+        <span class="icon">📱</span> Bio Templates <span class="count">3 <span style="color:#52525b;">/ 25</span></span>
+      </button>
+      <button class="nav-item" data-section="captions">
+        <span class="icon">✍️</span> Captions <span class="count">6 <span style="color:#52525b;">/ 50</span></span>
+      </button>
+      <button class="nav-item" data-section="ctas">
+        <span class="icon">📣</span> CTAs <span class="count">3 <span style="color:#52525b;">/ 30</span></span>
+      </button>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">AI Tools</div>
+      <button class="nav-item" data-section="ai_tool_guide">
+        <span class="icon">🤖</span> AI Tool Guide <span class="count">3</span>
+      </button>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Bonus Resources <span style="font-size:9px;background:rgba(254,44,85,0.2);color:#FE2C55;padding:2px 6px;border-radius:999px;margin-left:4px;font-weight:700;">PRO</span></div>
+      <button class="nav-item locked-item" onclick="showLockedSection('Algorithm Cheatsheet', '📊', '8 sections explaining how TikTok\'s algorithm really works in 2026 — the signals it uses, how videos get pushed, what kills your reach, and what boosts it.')">
+        <span class="icon">📊</span> Algorithm Cheatsheet <span class="count">🔒</span>
+      </button>
+      <button class="nav-item locked-item" onclick="showLockedSection('Best Posting Times', '⏰', 'Optimal posting times for 10 different niches. Know exactly when to post for maximum reach in your specific niche.')">
+        <span class="icon">⏰</span> Best Posting Times <span class="count">🔒</span>
+      </button>
+      <button class="nav-item locked-item" onclick="showLockedSection('30-Day Content Calendar', '📅', 'A complete 30-day content plan with video type, hook idea, and CTA for every single day. Never wonder what to post again.')">
+        <span class="icon">📅</span> 30-Day Calendar <span class="count">🔒</span>
+      </button>
+      <button class="nav-item locked-item" onclick="showLockedSection('Trending Sounds Guide', '🎵', '25 sound categories with best use cases and vibes. Use the right sound to boost your reach significantly.')">
+        <span class="icon">🎵</span> Trending Sounds <span class="count">🔒</span>
+      </button>
+      <button class="nav-item locked-item" onclick="showLockedSection('TikTok Mistakes to Avoid', '⚠️', '30 common mistakes that kill TikTok growth — with explanations of why they\'re bad and how to fix them. Great monthly audit checklist.')">
+        <span class="icon">⚠️</span> Mistakes to Avoid <span class="count">🔒</span>
+      </button>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">2026 New Additions <span style="font-size:9px;background:linear-gradient(135deg,#FE2C55,#25F4EE);color:#fff;padding:2px 6px;border-radius:999px;margin-left:4px;font-weight:700;">NEW</span></div>
+      <button class="nav-item locked-item" onclick="showLockedSection('TikTok Shop Guide', '🛒', 'Complete guide to TikTok Shop in 2026 — opening a shop, listing products, affiliate marketing, live shopping, and avoiding common mistakes. 12 in-depth tips.')">
+        <span class="icon">🛒</span> TikTok Shop Guide <span class="count">🔒</span>
+      </button>
+      <button class="nav-item locked-item" onclick="showLockedSection('Trending Sounds Guide 2026', '🎵', '26 sounds split into Evergreen classics and Trending 2026 sound types. Know exactly what sounds to use for your niche.')">
+        <span class="icon">🎵</span> Sounds Guide 2026 <span class="count">🔒</span>
+      </button>
+      <button class="nav-item locked-item" onclick="showLockedSection('How to Find Trending Sounds', '🔍', '8 proven methods to find trending sounds BEFORE they blow up. Includes how to predict trends, when to use sounds, and best practices.')">
+        <span class="icon">🔍</span> Find Trending Sounds <span class="count">🔒</span>
+      </button>
+      <button class="nav-item locked-item" onclick="showLockedSection('B-Roll Cheat Sheet', '🎥', '100 background footage ideas for faceless creators across 5 categories: screen recordings, object close-ups, ambient shots, text/graphics, and process/setup. Perfect for faceless accounts.')">
+        <span class="icon">🎥</span> B-Roll Cheat Sheet <span class="count">🔒</span>
+      </button>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Ads &amp; Tools <span style="font-size:9px;background:linear-gradient(135deg,#FE2C55,#25F4EE);color:#fff;padding:2px 6px;border-radius:999px;margin-left:4px;font-weight:700;">PRO</span></div>
+      <button class="nav-item locked-item" onclick="showLockedSection('TikTok Ads Templates', '📢', '13 proven TikTok Ads templates for every objective: Spark Ads, In-Feed Ads, TopView, Hashtag Challenges, Carousel, Retargeting, Lead Gen, and more. Each includes duration, structure, and pro tips.')">
+        <span class="icon">📢</span> TikTok Ads Templates <span class="count">🔒</span>
+      </button>
+      <button class="nav-item locked-item" onclick="showLockedSection('Hook Generator Tool', '⚡', 'Interactive tool: pick a template, fill in the blanks, get a custom hook instantly. 8 proven hook templates across curiosity, contrarian, list, story, problem, shocking, question, and mistake categories.')">
+        <span class="icon">⚡</span> Hook Generator <span class="count">🔒</span>
+      </button>
+      <button class="nav-item locked-item" onclick="showLockedSection('Script Customizer Tool', '📝', 'Interactive tool: pick a script type, enter your niche and details, get a custom video script. 6 script types: tutorial, review, story, listicle, comparison, behind-the-scenes.')">
+        <span class="icon">📝</span> Script Customizer <span class="count">🔒</span>
+      </button>
+      <button class="nav-item locked-item" onclick="showLockedSection('Hashtag Analyzer Tool', '🔍', 'Interactive tool: enter any hashtag to see estimated reach, competition level, and recommendations. Includes 8 reach patterns and 8 strategy tips for the perfect hashtag mix.')">
+        <span class="icon">🔍</span> Hashtag Analyzer <span class="count">🔒</span>
+      </button>
+    </div>
+
+    <div class="upgrade-card">
+      <span class="upgrade-arrow">👆</span>
+      <span class="upgrade-emoji">🔓</span>
+      <h4>Unlock Everything</h4>
+      <span class="price-tag">🔥 Launch: $18.00 (was $24)</span>
+      <p>Get all <strong style="color:#fff;">1,653 resources (2026 Edition)</strong>, Random Generator, Favorites system, and lifetime updates.</p>
+      <a href="https://shakweer3.gumroad.com/l/TikTok-Creator-Kit" class="upgrade-btn">Upgrade to Full Kit →</a>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+    <!-- Sticky top upgrade banner -->
+    <div id="topUpgradeBanner" style="background:linear-gradient(135deg,#FE2C55,#ff406b);color:#fff;padding:10px 20px;border-radius:10px;margin-bottom:18px;display:flex;align-items:center;gap:12px;font-size:13.5px;font-weight:600;box-shadow:0 4px 14px rgba(254,44,85,0.3);">
+      <span style="font-size:18px;flex-shrink:0;">🔓</span>
+      <span style="flex:1;line-height:1.4;">🔥 <strong>2026 Edition</strong> · You're using the <strong>free demo</strong> (10% of content). <strong>Launch offer:</strong> Get all 1,653 resources at <del style="opacity:0.6;">$24</del> <strong>$18.00</strong> (first 50 customers).</span>
+      <a href="https://shakweer3.gumroad.com/l/TikTok-Creator-Kit" id="topBannerCta" style="background:#fff;color:#FE2C55;padding:6px 14px;border-radius:999px;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;flex-shrink:0;">Upgrade →</a>
+      <button onclick="document.getElementById('topUpgradeBanner').style.display='none';" style="background:rgba(255,255,255,0.2);border:none;color:#fff;width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:14px;flex-shrink:0;display:grid;place-items:center;">✕</button>
+    </div>
+
+    <!-- ============ QUICK ACCESS TABS ============ -->
+    <style>
+      .quick-tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 18px;
+        flex-wrap: wrap;
+      }
+      .quick-tab {
+        flex: 1;
+        min-width: 180px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 16px;
+        border-radius: 12px;
+        font-size: 13.5px;
+        font-weight: 700;
+        cursor: pointer;
+        text-decoration: none;
+        color: #fff;
+        transition: all .2s ease;
+        font-family: inherit;
+        border: 1px solid transparent;
+      }
+      .quick-tab .qt-icon {
+        font-size: 20px;
+        line-height: 1;
+        flex-shrink: 0;
+      }
+      .quick-tab .qt-text {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .quick-tab .qt-text strong {
+        font-size: 13.5px;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+      }
+      .quick-tab .qt-text span {
+        font-size: 11px;
+        font-weight: 500;
+        opacity: 0.85;
+      }
+      .quick-tab.creator {
+        background: linear-gradient(135deg, #8b5cf6, #ec4899);
+        box-shadow: 0 4px 14px rgba(139, 92, 246, 0.3);
+      }
+      .quick-tab.creator:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(139, 92, 246, 0.45);
+      }
+      .quick-tab.faq {
+        background: linear-gradient(135deg, #06b6d4, #3b82f6);
+        box-shadow: 0 4px 14px rgba(6, 182, 212, 0.3);
+      }
+      .quick-tab.faq:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(6, 182, 212, 0.45);
+      }
+      @media (max-width: 640px) {
+        .quick-tab { min-width: 100%; }
+      }
+    </style>
+
+    <div class="quick-tabs">
+      <a href="#about" class="quick-tab creator" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth', block:'start'}); return false;">
+        <span class="qt-icon">👤</span>
+        <span class="qt-text">
+          <strong>Meet the Creator</strong>
+          <span>Who built this kit & why</span>
+        </span>
+      </a>
+      <a href="#faq" class="quick-tab faq" onclick="document.getElementById('faq').scrollIntoView({behavior:'smooth', block:'start'}); return false;">
+        <span class="qt-icon">❓</span>
+        <span class="qt-text">
+          <strong>FAQ</strong>
+          <span>Quick answers before you buy</span>
+        </span>
+      </a>
+    </div>
+
+    <div class="main-header">
+      <div>
+        <h1 class="main-title" id="mainTitle">Hooks</h1>
+        <p class="main-subtitle" id="mainSubtitle">Scroll-stopping hooks across 6 categories</p>
+      </div>
+      <span class="demo-watermark">🔒 Free Demo — Limited Access</span>
+    </div>
+
+    <!-- Section info banner (shows description for current section) -->
+    <div id="sectionInfoBanner" style="display:none;background:linear-gradient(135deg,rgba(254,44,85,0.06),rgba(37,244,238,0.04));border:1px solid rgba(37,244,238,0.2);border-radius:12px;padding:16px 20px;margin-bottom:20px;align-items:flex-start;gap:14px;">
+      <div style="font-size:22px;flex-shrink:0;" id="sectionInfoIcon">💡</div>
+      <div style="flex:1;font-size:13.5px;color:#d4d4d8;line-height:1.6;" id="sectionInfoContent">
+        <!-- Filled by JS -->
+      </div>
+      <button onclick="document.getElementById('sectionInfoBanner').style.display='none';" style="background:#27272a;border:1px solid #3f3f46;color:#a1a1aa;width:28px;height:28px;border-radius:6px;cursor:pointer;flex-shrink:0;font-size:14px;display:grid;place-items:center;">✕</button>
+    </div>
+
+    <div class="stat-bar" id="statBar"></div>
+    <!-- Progress bar showing demo vs full content (clickable → Gumroad) -->
+    <a href="https://shakweer3.gumroad.com/l/TikTok-Creator-Kit" target="_blank" rel="noopener" id="demoProgressLink" style="text-decoration:none;display:block;margin-bottom:16px;">
+      <div id="demoProgress" style="display:none;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:11px;color:#71717a;">
+          <span>📊 Demo progress <span style="color:#FE2C55;">→ click to unlock full kit</span></span>
+          <span id="progressLabel">10%</span>
+        </div>
+        <div style="background:#18181b;border:1px solid #27272a;border-radius:999px;height:8px;overflow:hidden;">
+          <div id="progressFill" style="background:linear-gradient(90deg,#FE2C55,#ff406b);height:100%;border-radius:999px;transition:width .5s ease;width:10%;"></div>
+        </div>
+      </div>
+    </a>
+
+    <div class="search-bar">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search hooks, prompts, scripts...">
+    </div>
+
+    <div class="filters" id="filters"></div>
+
+    <div class="content-grid" id="contentGrid"></div>
+  </main>
+</div>
+
+<!-- ============ TIMED UPGRADE MODAL ============ -->
+<div id="upgradeModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);z-index:300;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:linear-gradient(180deg,#18181b,#0a0a0b);border:1px solid rgba(254,44,85,0.3);border-radius:20px;padding:32px;max-width:480px;width:100%;position:relative;box-shadow:0 20px 60px rgba(254,44,85,0.2);">
+    <button onclick="closeUpgradeModal()" style="position:absolute;top:14px;right:14px;background:#27272a;border:1px solid #3f3f46;color:#a1a1aa;width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:16px;display:grid;place-items:center;">✕</button>
+    <div style="text-align:center;margin-bottom:20px;">
+      <div style="font-size:48px;margin-bottom:12px;">🔓</div>
+      <h2 style="color:#fff;font-size:24px;font-weight:800;margin-bottom:8px;letter-spacing:-0.02em;">Enjoying the demo?</h2>
+      <p style="color:#a1a1aa;font-size:14px;">Get the Full Kit and unlock everything you need to go viral on TikTok.</p>
+    </div>
+    <div style="background:#0a0a0b;border:1px solid #27272a;border-radius:12px;padding:16px;margin-bottom:20px;">
+      <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;">
+        <span style="color:#71717a;">Demo resources</span>
+        <span style="color:#a1a1aa;font-weight:600;">127</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;border-top:1px solid #27272a;">
+        <span style="color:#25F4EE;font-weight:600;">Full Kit resources (2026)</span>
+        <span style="color:#fff;font-weight:800;">1,653</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;border-top:1px solid #27272a;">
+        <span style="color:#71717a;">Random Generator</span>
+        <span style="color:#22c55e;">✓ Included</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;border-top:1px solid #27272a;">
+        <span style="color:#71717a;">Favorites System</span>
+        <span style="color:#22c55e;">✓ Included</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;border-top:1px solid #27272a;">
+        <span style="color:#71717a;">Lifetime Updates</span>
+        <span style="color:#22c55e;">✓ Free</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;border-top:1px solid #27272a;">
+        <span style="color:#71717a;">Regular price</span>
+        <span style="color:#a1a1aa;text-decoration:line-through;">$24.00</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;border-top:1px solid #27272a;">
+        <span style="color:#FE2C55;font-weight:700;">🔥 Launch price (first 50)</span>
+        <span style="color:#FE2C55;font-weight:800;">$18.00</span>
+      </div>
+    </div>
+    <div style="background:rgba(254,44,85,0.1);border:1px solid rgba(254,44,85,0.3);border-radius:8px;padding:10px;margin-bottom:16px;text-align:center;font-size:12px;color:#FE2C55;font-weight:600;">⏰ Launch offer: 25% off for first 50 customers only</div>
+    <a href="https://shakweer3.gumroad.com/l/TikTok-Creator-Kit" id="modalCta" style="display:block;text-align:center;background:linear-gradient(135deg,#FE2C55,#ff406b);color:#fff;padding:14px;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none;box-shadow:0 4px 14px rgba(254,44,85,0.3);margin-bottom:10px;">🔥 Get Launch Price — $18.00 →</a>
+    <button onclick="closeUpgradeModal()" style="display:block;width:100%;background:transparent;border:none;color:#71717a;font-size:13px;cursor:pointer;padding:8px;">Maybe later</button>
+  </div>
+</div>
+
+<!-- ============ LOCKED SECTION MODAL ============ -->
+<div id="lockedModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);z-index:300;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:linear-gradient(180deg,#18181b,#0a0a0b);border:1px solid rgba(254,44,85,0.4);border-radius:20px;padding:32px;max-width:440px;width:100%;position:relative;box-shadow:0 20px 60px rgba(254,44,85,0.3);text-align:center;">
+    <button onclick="closeLockedModal()" style="position:absolute;top:14px;right:14px;background:#27272a;border:1px solid #3f3f46;color:#a1a1aa;width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:16px;">✕</button>
+    <div style="font-size:48px;margin-bottom:12px;" id="lockedModalIcon">📊</div>
+    <div style="display:inline-block;background:rgba(254,44,85,0.15);color:#FE2C55;font-size:11px;font-weight:700;letter-spacing:0.08em;padding:4px 12px;border-radius:999px;margin-bottom:14px;">🔒 PRO FEATURE</div>
+    <h2 style="color:#fff;font-size:22px;font-weight:800;margin-bottom:10px;letter-spacing:-0.02em;" id="lockedModalTitle">Algorithm Cheatsheet</h2>
+    <p style="color:#a1a1aa;font-size:13.5px;line-height:1.55;margin-bottom:20px;" id="lockedModalDesc">Description here.</p>
+    <div style="background:#0a0a0b;border:1px solid #27272a;border-radius:10px;padding:14px;margin-bottom:16px;text-align:left;">
+      <div style="font-size:12px;color:#71717a;margin-bottom:8px;font-weight:600;">✨ AVAILABLE IN FULL KIT:</div>
+      <div style="font-size:13px;color:#25F4EE;line-height:1.7;">
+        ✓ All 5 Bonus Resources<br>
+        ✓ 1,653 total resources (2026 Edition)<br>
+        ✓ Random Generator<br>
+        ✓ Favorites System<br>
+        ✓ Lifetime updates
+      </div>
+    </div>
+    <div style="background:rgba(254,44,85,0.1);border:1px solid rgba(254,44,85,0.3);border-radius:8px;padding:10px;margin-bottom:16px;text-align:center;font-size:12px;color:#FE2C55;font-weight:600;">🔥 Launch offer: 25% off — $18.00 instead of $24 (first 50 customers)</div>
+    <a href="https://shakweer3.gumroad.com/l/TikTok-Creator-Kit" style="display:block;text-align:center;background:linear-gradient(135deg,#FE2C55,#ff406b);color:#fff;padding:14px;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none;box-shadow:0 4px 14px rgba(254,44,85,0.3);margin-bottom:10px;">🔥 Unlock All Bonuses — $18.00 →</a>
+    <button onclick="closeLockedModal()" style="display:block;width:100%;background:transparent;border:none;color:#71717a;font-size:13px;cursor:pointer;padding:8px;">Maybe later</button>
+  </div>
+</div>
+
+<style>
+#upgradeModal.show { display: flex; }
+#lockedModal.show { display: flex; }
+.locked-item { position: relative; opacity: 0.85; }
+.locked-item:hover { opacity: 1; background: rgba(254,44,85,0.08); color: #fff; }
+.locked-item .count { background: rgba(254,44,85,0.15); color: #FE2C55; }
+</style>
+
+<script>
+// ============ DATA ============
+const DATA = {
+  "hooks": {
+    "curiosity": [
+      "The 3rd tip will change how you make TikToks forever...",
+      "I tried this trend for 7 days and the results shocked me...",
+      "Nobody talks about this TikTok feature but it's a game-changer...",
+      "This hidden hack got me 1M views in 24 hours...",
+      "Wait until you see what happens at the end..."
+    ],
+    "contrarian": [
+      "Stop posting every day. Here's what actually works...",
+      "Quality doesn't matter on TikTok as much as you think...",
+      "The 'consistency myth' is killing your TikTok growth...",
+      "Hooks are overrated. This matters way more...",
+      "Forget trends — do this instead for viral growth..."
+    ],
+    "list": [
+      "3 TikTok hacks that are working right now...",
+      "5 editing tricks that make your videos look pro...",
+      "7 niche ideas that will explode in 2026...",
+      "10 trending sounds you should use this week...",
+      "5 mistakes killing your TikTok growth..."
+    ],
+    "story": [
+      "I went from 0 to 100K followers in 60 days. Here's exactly what I did...",
+      "I quit my 9-5 because of this TikTok strategy...",
+      "After 200 failed TikToks, I finally figured it out...",
+      "I made $10K from one viral TikTok. Here's the breakdown...",
+      "I tried the 'lazy method' for 30 days and this happened..."
+    ],
+    "problem": [
+      "Getting 200 views on every TikTok? Here's the actual problem...",
+      "Posting every day but not growing? This is why...",
+      "Your TikToks stop at 1K views? Here's the real reason...",
+      "Struggling to come up with content ideas? Try this system...",
+      "TikTok shadowban keeping you stuck? Here's the fix..."
+    ],
+    "shocking": [
+      "I made $47K from one 7-second TikTok. Here's the breakdown...",
+      "This sound got 50M views in 48 hours. Here's why...",
+      "Posting at 3AM got me 2M views. Here's the data...",
+      "I deleted my viral TikTok and it changed everything...",
+      "This 1-second edit got me 10K followers overnight..."
+    ]
+  },
+  "prompts": {
+    "idea_generation": [
+      "Act as a viral TikTok content strategist. Generate 10 viral TikTok video ideas for the niche: [NICHE]. Each idea must include: 1) Hook (first 3 seconds), 2) Core concept, 3) Why it will go viral, 4) Estimated best posting time. Format as a numbered list.",
+      "I'm a TikTok creator in the [NICHE] niche. Generate 15 content ideas inspired by current trends but with a unique twist that makes them stand out. For each idea, explain the trend source and the unique angle."
+    ],
+    "script_writing": [
+      "Write a 45-second TikTok script for [NICHE]. The topic is [TOPIC]. Include: 1) A scroll-stopping hook (first 3 seconds), 2) The main value/content, 3) A memorable closing with CTA. Format with timestamps and stage directions.",
+      "Act as a viral TikTok scriptwriter. Write a 60-second educational script for [NICHE] about [TOPIC]. Use the 'hook-value-payoff' structure. Include specific edit cues, text overlays, and B-roll suggestions."
+    ],
+    "hook_creation": [
+      "Act as a viral TikTok hook writer. Generate 10 curiosity-driven hooks for a video about [TOPIC] in the [NICHE] niche. Each hook should make viewers NEED to watch until the end. Avoid clichés.",
+      "I need 10 contrarian hooks for TikTok in the [NICHE] niche about [TOPIC]. Each hook should challenge conventional wisdom in a way that's defensible but stops the scroll."
+    ],
+    "caption_writing": [
+      "Write a TikTok caption for a [CONTENT TYPE] video about [TOPIC] in [NICHE]. The caption should: 1) Reinforce the hook, 2) Add context not in the video, 3) End with a question to drive comments, 4) Include 5-7 relevant hashtags.",
+      "Act as a TikTok caption writer. Create 3 caption variations for a video about [TOPIC] in [NICHE]. Make one short (under 50 chars), one medium (50-150 chars), and one long (150-300 chars). Include hashtags for each."
+    ],
+    "hashtag_research": [
+      "Act as a TikTok hashtag strategist. Research and suggest 15 hashtags for a video about [TOPIC] in the [NICHE] niche. Mix: 3 broad (1M+ posts), 5 medium (100K-1M posts), and 7 niche (10K-100K posts). Explain why each.",
+      "I need a hashtag strategy for a [NICHE] TikTok account. Suggest: 1) 5 evergreen hashtags to use on every video, 2) 10 trending hashtags this week, 3) 5 niche-specific hashtags. Explain the mix."
+    ],
+    "trend_analysis": [
+      "Act as a TikTok trend analyst. Identify 5 current trends in the [NICHE] niche and explain: 1) The trend origin, 2) Why it's working, 3) How to adapt it without copying, 4) How much longer it will likely last.",
+      "Analyze the top 10 viral TikToks in [NICHE] from the past 7 days. Identify patterns in: hooks, video length, editing style, sounds, and posting times. Summarize the actionable insights."
+    ],
+    "bio_optimization": [
+      "Act as a TikTok bio copywriter. Write 3 bio variations for a [NICHE] creator. Each should be under 80 characters, include a clear value proposition, and end with a CTA. Explain the strategy behind each.",
+      "I need a TikTok bio for a [NICHE] account that converts visitors to followers. Include: 1) A hook line, 2) Authority/credibility, 3) What to expect, 4) CTA. Keep it under 80 characters."
+    ],
+    "cta_creation": [
+      "Act as a TikTok CTA specialist. Generate 10 CTAs for a [CONTENT TYPE] video about [TOPIC] in [NICHE]. Each CTA should drive a specific action: follow, comment, save, share, or click link. Vary the approaches.",
+      "I need 5 'follow for more' CTAs for TikTok in [NICHE]. Each should feel natural, not salesy. Vary the structure: question, promise, curiosity, social proof, direct."
+    ],
+    "storytelling": [
+      "Act as a TikTok storyteller. Write a 60-second personal story about [TOPIC] in [NICHE]. Use the 'in media res' opening — start in the middle of the action. Build tension, then resolve. Include stage directions.",
+      "I need a 45-second 'story time' script for TikTok about a failure in [NICHE]. Structure: 1) The setup, 2) The mistake, 3) The consequence, 4) The lesson. Make it relatable and vulnerable."
+    ]
+  },
+  "scripts": [
+    {
+      "id": 1,
+      "type": "Educational",
+      "duration": "30-60s",
+      "title": "The 3-Step Tutorial",
+      "template": "HOOK (3s): 'Nobody talks about this, but [TOPIC] is easier than you think. Here's the 3-step method I use.'\n\nSTEP 1 (10s): 'First, [ACTION 1]. This matters because [REASON]. Watch how I do it: [DEMO].'\n\nSTEP 2 (10s): 'Next, [ACTION 2]. Most people skip this and that's why they fail. [DEMO].'\n\nSTEP 3 (10s): 'Finally, [ACTION 3]. This is the secret sauce. [DEMO].'\n\nCTA (5s): 'Save this and follow for more [NICHE] tips.'"
+    },
+    {
+      "id": 2,
+      "type": "Educational",
+      "duration": "45-60s",
+      "title": "Myth-Buster",
+      "template": "HOOK (3s): 'Everything you've been told about [TOPIC] is wrong.'\n\nMYTH (10s): 'They say [COMMON MYTH]. Sounds right, doesn't it?'\n\nREALITY (15s): 'But here's the truth: [REALITY]. I learned this the hard way when [PERSONAL STORY].'\n\nEVIDENCE (10s): 'Look at this: [EVIDENCE/EXAMPLE]. See the difference?'\n\nCTA (5s): 'Follow for more [TOPIC] truths they don't tell you.'"
+    },
+    {
+      "id": 3,
+      "type": "Educational",
+      "duration": "30-45s",
+      "title": "Comparison",
+      "template": "HOOK (3s): '[OPTION A] vs [OPTION B]. I tested both for [TIME]. Here's the winner.'\n\nOPTION A (10s): '[OPTION A]: [PRO 1], [PRO 2]. But [CON].'\n\nOPTION B (10s): '[OPTION B]: [PRO 1], [PRO 2]. But [CON].'\n\nVERDICT (10s): 'For [SPECIFIC SITUATION], go with [WINNER]. For [OTHER SITUATION], choose [OTHER].'\n\nCTA (5s): 'Save this so you remember. Which would you pick?'"
+    },
+    {
+      "id": 4,
+      "type": "Educational",
+      "duration": "30-45s",
+      "title": "Listicle",
+      "template": "HOOK (3s): '5 [ITEMS] that changed my [OUTCOME]. #3 is the most underrated.'\n\nITEM 1 (5s): 'Number 1: [ITEM]. [WHY IT MATTERS].'\n\nITEM 2 (5s): 'Number 2: [ITEM]. [WHY IT MATTERS].'\n\nITEM 3 (5s): 'Number 3: [ITEM]. I never see anyone talking about this. [WHY IT MATTERS].'\n\nITEM 4 (5s): 'Number 4: [ITEM]. [WHY IT MATTERS].'\n\nITEM 5 (5s): 'Number 5: [ITEM]. [WHY IT MATTERS].'\n\nCTA (5s): 'Comment your favorite. Follow for more.'"
+    },
+    {
+      "id": 5,
+      "type": "Educational",
+      "duration": "60s",
+      "title": "Problem-Solution",
+      "template": "HOOK (3s): 'Struggling with [PROBLEM]? I was too. Here's what fixed it.'\n\nPROBLEM (10s): '[DESCRIBE PAIN]. You've tried [ATTEMPT 1], [ATTEMPT 2]. Nothing works.'\n\nSOLUTION (15s): 'Then I found [SOLUTION]. Here's how it works: [EXPLANATION].'\n\nRESULTS (10s): 'In [TIMEFRAME], I went from [BEFORE] to [AFTER].'\n\nCTA (5s): 'Try it and follow for more [NICHE] solutions.'"
+    }
+  ],
+  "hashtags": {
+    "business": [
+      "#entrepreneur",
+      "#smallbusiness",
+      "#businesstips"
+    ],
+    "fitness": [
+      "#fitness",
+      "#workout",
+      "#gym"
+    ],
+    "food": [
+      "#food",
+      "#foodie",
+      "#recipe"
+    ],
+    "fashion": [
+      "#fashion",
+      "#ootd",
+      "#style"
+    ],
+    "education": [
+      "#learnontiktok",
+      "#education",
+      "#edutok"
+    ],
+    "tech": [
+      "#tech",
+      "#technology",
+      "#techtok"
+    ],
+    "travel": [
+      "#travel",
+      "#traveling",
+      "#wanderlust"
+    ],
+    "finance": [
+      "#personalfinance",
+      "#money",
+      "#investing"
+    ],
+    "lifestyle": [
+      "#lifestyle",
+      "#dailylife",
+      "#dailyroutine"
+    ],
+    "motivation": [
+      "#motivation",
+      "#motivational",
+      "#mindset"
+    ]
+  },
+  "ideas": {
+    "trend_jacking": [
+      "Use a trending sound to share [NICHE]-specific insight",
+      "Stitch a viral video and add your unique [NICHE] perspective",
+      "Duet a trending challenge with your [NICHE] twist",
+      "Adapt a trending format to your specific [NICHE] topic"
+    ],
+    "educational": [
+      "Teach a [NICHE] skill in 60 seconds",
+      "Explain a [NICHE] concept using a simple analogy",
+      "Share a [NICHE] hack most beginners don't know",
+      "Compare two [NICHE] tools/methods head-to-head"
+    ],
+    "behind_the_scenes": [
+      "Show your workspace/setup for [NICHE] work",
+      "Film a real (unedited) work session in [NICHE]",
+      "Show the bloopers from a recent [NICHE] project",
+      "Behind the scenes of creating a [NICHE] product"
+    ],
+    "storytelling": [
+      "Tell the story of how you got into [NICHE]",
+      "Share your biggest failure in [NICHE] and the lesson",
+      "Tell a story about a [NICHE] mentor who changed you",
+      "Share a 'lucky break' moment in your [NICHE] journey"
+    ],
+    "listicle": [
+      "5 [NICHE] tools I can't live without",
+      "10 [NICHE] terms beginners should know",
+      "3 [NICHE] habits that changed my life",
+      "7 [NICHE] mistakes beginners always make"
+    ],
+    "controversial": [
+      "[NICHE] is overrated. Here's what's actually better",
+      "Stop doing [COMMON PRACTICE] in [NICHE]. It's wrong",
+      "The [NICHE] industry is broken. Here's the truth",
+      "Most [NICHE] advice is generic garbage"
+    ]
+  },
+  "formulas": [
+    {
+      "id": 1,
+      "type": "Number-based",
+      "formula": "[NUMBER] [NICHE] Secrets Nobody Told You About",
+      "example": "5 TikTok Secrets Nobody Told You About"
+    },
+    {
+      "id": 2,
+      "type": "Number-based",
+      "formula": "[NUMBER] Things I Wish I Knew Before [ACTIVITY]",
+      "example": "7 Things I Wish I Knew Before Going Viral"
+    },
+    {
+      "id": 3,
+      "type": "Number-based",
+      "formula": "[NUMBER] [NICHE] Mistakes That Are Killing Your [GOAL]",
+      "example": "5 TikTok Mistakes That Are Killing Your Growth"
+    },
+    {
+      "id": 4,
+      "type": "Number-based",
+      "formula": "Top [NUMBER] [ITEMS] for [USE CASE] in 2026",
+      "example": "Top 5 Editing Apps for TikTok in 2026"
+    },
+    {
+      "id": 5,
+      "type": "Number-based",
+      "formula": "[NUMBER] Free [ITEMS] Better Than Paid Alternatives",
+      "example": "7 Free Editing Tools Better Than Paid Ones"
+    },
+    {
+      "id": 6,
+      "type": "Number-based",
+      "formula": "[NUMBER] [NICHE] Hacks That Save [TIME/MONEY]",
+      "example": "3 TikTok Hacks That Save Hours Daily"
+    },
+    {
+      "id": 7,
+      "type": "Number-based",
+      "formula": "[NUMBER] [NICHE] Terms Beginners Need to Know",
+      "example": "10 TikTok Terms Beginners Need to Know"
+    },
+    {
+      "id": 8,
+      "type": "Number-based",
+      "formula": "[NUMBER] Habits of Successful [ROLE]s",
+      "example": "5 Habits of Successful TikTok Creators"
+    }
+  ],
+  "bios": [
+    {
+      "id": 1,
+      "type": "Business",
+      "template": "[ROLE] @ [COMPANY] | Helping [AUDIENCE] achieve [OUTCOME] | [CREDIBILITY MARKER] | Free [RESOURCE]: [LINK]"
+    },
+    {
+      "id": 2,
+      "type": "Business",
+      "template": "Founder of [BRAND] | [OUTCOME] for [AUDIENCE] | Featured in [PUBLICATION] | Work with us: [LINK]"
+    },
+    {
+      "id": 3,
+      "type": "Business",
+      "template": "[TITLE] & [TITLE] | Building [THING] | [NUMBER]+ [METRIC] | Free [RESOURCE] in bio"
+    }
+  ],
+  "ctas": [
+    "Follow for more [NICHE] tips",
+    "Save this for later",
+    "Comment '[WORD]' and I'll DM you the link"
+  ],
+  "captions": [
+    {
+      "id": 1,
+      "type": "Educational",
+      "template": "Most people get [TOPIC] wrong. Here's the right way. Save this and follow for more [NICHE] tips. #niche #tip"
+    },
+    {
+      "id": 2,
+      "type": "Educational",
+      "template": "[NUMBER] [ITEMS] that actually work. Comment which one you're trying first. #niche #learn"
+    },
+    {
+      "id": 3,
+      "type": "Educational",
+      "template": "Stop doing [COMMON MISTAKE]. Do this instead. Save for later. #niche #growth"
+    },
+    {
+      "id": 4,
+      "type": "Educational",
+      "template": "If you're a [AUDIENCE], you need to know this. Follow for more. #niche #beginner"
+    },
+    {
+      "id": 5,
+      "type": "Educational",
+      "template": "The truth about [TOPIC] they don't tell you. Comment your thoughts. #niche #truth"
+    },
+    {
+      "id": 6,
+      "type": "Educational",
+      "template": "[NUMBER]-step method to [ACHIEVE OUTCOME]. Save this. #niche #tutorial"
+    }
+  ],
+  "ai_tool_guide": [
+    {
+      "category": "Idea Generation",
+      "best_tools": [
+        "ChatGPT (GPT-4)",
+        "Claude 3.5",
+        "Gemini"
+      ],
+      "why": "Creative ideation works best with strong reasoning models. ChatGPT and Claude excel at generating diverse, actionable ideas.",
+      "free_alternative": "Gemini (free) or Microsoft Copilot (free, GPT-4 powered)",
+      "tip": "Ask for 10+ ideas at once, then ask the AI to rank them by viral potential."
+    },
+    {
+      "category": "Script Writing",
+      "best_tools": [
+        "Claude 3.5",
+        "ChatGPT (GPT-4)"
+      ],
+      "why": "Claude is the strongest for storytelling and natural dialogue. ChatGPT is great for structured scripts with clear beats.",
+      "free_alternative": "Claude free tier (limited daily) or Gemini for shorter scripts",
+      "tip": "Always ask for \"conversational tone\" and \"TikTok-style\" to avoid robotic output."
+    },
+    {
+      "category": "Hook Creation",
+      "best_tools": [
+        "ChatGPT (GPT-4)",
+        "Claude 3.5",
+        "DeepSeek"
+      ],
+      "why": "Hooks need punchy, creative writing. All three top-tier models handle this well, but ChatGPT tends to be most concise.",
+      "free_alternative": "DeepSeek (free) or Gemini (free)",
+      "tip": "Generate 20+ hooks, then manually pick the top 3. Quantity beats quality here."
+    }
+  ]
+};
+
+// Section meta
+const SECTIONS = {
+  hooks: {
+    title: 'Hooks',
+    subtitle: 'Scroll-stopping hooks across 6 categories',
+    tagLabel: 'Category',
+    description: '<strong>What is a hook?</strong> The first 3 seconds of your TikTok — the make-or-break moment when viewers decide to keep watching or scroll past. A great hook can 10x your completion rate, which is the #1 signal TikTok\'s algorithm uses to push your video.<br><br><strong>How to use:</strong> Pick a hook that fits your video\'s vibe, tweak the wording to match your niche, and use it as your opening line. Test different hook categories to see what resonates with your audience.'
+  },
+  prompts: {
+    title: 'AI Prompts',
+    subtitle: 'Universal text prompts — works with any AI chatbot (ChatGPT, Claude, Gemini, DeepSeek, Copilot, Grok & more). Not for image/video AI like Midjourney or DALL-E.',
+    tagLabel: 'Use Case',
+    description: '<strong>What is an AI prompt?</strong> A specific instruction you give to an AI chatbot to generate the content you need — ideas, scripts, captions, hooks, or strategies. Better prompts = better results. These are pre-engineered prompts that save you hours of trial and error.<br><br><strong>How to use:</strong> Click Copy, paste into ChatGPT/Claude/Gemini, replace the [BRACKETS] with your details (niche, topic, audience), and the AI will generate customized content for you.<br><br><span style="color:#facc15;">⚠ Text-only AI chatbots — not for Midjourney, DALL-E, or other image/video generators.</span>'
+  },
+  scripts: {
+    title: 'Script Templates',
+    subtitle: 'Fill-in-the-blank video scripts',
+    tagLabel: 'Type',
+    description: '<strong>What is a script template?</strong> A pre-structured video script with placeholders [LIKE THIS] that you fill in with your content. Each template includes a hook, body, and call-to-action — the proven structure of viral TikToks.<br><br><strong>How to use:</strong> Pick a template that matches your video type, replace the [BRACKETS] with your specific content, and you have a ready-to-shoot script in under 2 minutes.'
+  },
+  ideas: {
+    title: 'Content Ideas',
+    subtitle: 'Beat creator\'s block instantly',
+    tagLabel: 'Category',
+    description: '<strong>What is this?</strong> Proven content ideas across 6 categories — from trend-jacking to storytelling to controversial takes. Use these when you\'re stuck and need inspiration fast.<br><br><strong>How to use:</strong> Browse by category, or upgrade to the Full Kit for the 🎲 Random Generator that gives you instant inspiration with one click.'
+  },
+  hashtags: {
+    title: 'Hashtag Database',
+    subtitle: 'Niche-organized hashtags',
+    tagLabel: 'Niche',
+    description: '<strong>What are hashtags?</strong> Tags that help TikTok categorize and distribute your content to the right audience. The right mix can significantly boost your reach — but using too many or irrelevant ones can hurt you.<br><br><strong>How to use:</strong> Pick 3-5 niche-specific hashtags + 1-2 broader ones. Use the Copy button to grab a whole set at once. <span style="color:#facc15;">⚠ Always verify hashtags are still active on TikTok before using — trends shift fast.</span>'
+  },
+  formulas: {
+    title: 'Title Formulas',
+    subtitle: 'Proven viral title structures',
+    tagLabel: 'Type',
+    description: '<strong>What is a title formula?</strong> A proven sentence structure that grabs attention and drives clicks. These formulas are reverse-engineered from thousands of viral TikToks across every niche.<br><br><strong>How to use:</strong> Pick a formula type (number-based, how-to, question, etc.), fill in your niche/topic/numbers, and you have a scroll-stopping title instantly. Use as your on-screen text or video caption.'
+  },
+  bios: {
+    title: 'Bio Templates',
+    subtitle: 'Profile bio templates by account type',
+    tagLabel: 'Type',
+    description: '<strong>What is a bio?</strong> The 80-character description under your username. It\'s your first impression — visitors decide in 2 seconds whether to follow based on your bio. A clear, compelling bio converts profile visits into followers.<br><br><strong>How to use:</strong> Pick a template that matches your account type, fill in the [BRACKETS], and paste into your TikTok bio. Keep it under 80 characters to avoid truncation.'
+  },
+  captions: {
+    title: 'Caption Templates',
+    subtitle: 'Ready-to-use caption formulas',
+    tagLabel: 'Type',
+    description: '<strong>What is a caption?</strong> The text that accompanies your TikTok video. Captions boost engagement, help the algorithm understand your content, and give context the video can\'t. A good caption can double your engagement rate.<br><br><strong>How to use:</strong> Pick a template, replace [BRACKETS] with your details, and add 3-5 relevant hashtags. Always end with a CTA (see CTA Library) to drive engagement.'
+  },
+  ctas: {
+    title: 'CTA Library',
+    subtitle: 'High-converting call-to-actions',
+    tagLabel: 'Action',
+    description: '<strong>What is a CTA?</strong> Call-To-Action — the line that tells viewers what to do next (follow, comment, save, share, click). Videos without CTAs leave engagement on the table. The right CTA can 3x your follow rate.<br><br><strong>How to use:</strong> Pick a CTA that matches your goal (follows, comments, saves, etc.), place it at the end of your video AND in your caption. Test different CTAs to see what converts best for your audience.'
+  },
+  ai_tool_guide: {
+    title: 'AI Tool Guide',
+    subtitle: 'Best AI tool for each prompt type — preview (3 of 9 in full kit)',
+    tagLabel: 'Guide',
+    description: '<strong>What is this?</strong> Not all AI tools are equal for every task. This guide shows you the best AI chatbot for each type of prompt — so you get the best results without wasting time on the wrong tool.<br><br><strong>How to use:</strong> Find your prompt category, check the recommended tools, and use the free alternative if you don\'t have a paid subscription. Apply the Pro Tip for best results. <span style="color:#25F4EE;">(Preview — full kit has all 9 categories)</span>'
+  }
+};
+
+let currentSection = 'hooks';
+let currentFilter = 'all';
+let searchTerm = '';
+
+// ============ RENDER ============
+function render() {
+  const meta = SECTIONS[currentSection];
+  document.getElementById('mainTitle').textContent = meta.title;
+  document.getElementById('mainSubtitle').textContent = meta.subtitle;
+
+  // Render filters
+  renderFilters();
+
+  // Render content
+  renderContent();
+
+  // Update stat bar
+  updateStatBar();
+}
+
+function renderFilters() {
+  const filtersEl = document.getElementById('filters');
+  if (currentSection === 'ai_tool_guide') {
+    filtersEl.innerHTML = '';
+    return;
+  }
+  const data = DATA[currentSection];
+
+  if (Array.isArray(data)) {
+    // For arrays (scripts, formulas, bios, captions, ctas) - filter by type
+    const types = [...new Set(data.map(item => item.type || item.category || 'All'))];
+    if (types.length <= 1) {
+      filtersEl.innerHTML = '';
+      return;
+    }
+    let html = `<button class="filter-chip ${currentFilter === 'all' ? 'active' : ''}" onclick="setFilter('all')">All</button>`;
+    types.forEach(t => {
+      html += `<button class="filter-chip ${currentFilter === t ? 'active' : ''}" onclick="setFilter('${t}')">${t}</button>`;
+    });
+    filtersEl.innerHTML = html;
+  } else {
+    // For objects (hooks, prompts, ideas, hashtags) - filter by key
+    const keys = Object.keys(data);
+    let html = `<button class="filter-chip ${currentFilter === 'all' ? 'active' : ''}" onclick="setFilter('all')">All</button>`;
+    keys.forEach(k => {
+      const label = k.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+      html += `<button class="filter-chip ${currentFilter === k ? 'active' : ''}" onclick="setFilter('${k}')">${label}</button>`;
+    });
+    filtersEl.innerHTML = html;
+  }
+}
+
+function renderContent() {
+  const grid = document.getElementById('contentGrid');
+  const data = DATA[currentSection];
+  let items = [];
+
+  // Special rendering for AI Tool Guide
+  if (currentSection === 'ai_tool_guide') {
+    const guide = DATA.ai_tool_guide || [];
+    let filtered = guide;
+    if (searchTerm) {
+      filtered = guide.filter(g => (g.category + ' ' + g.why + ' ' + g.tip).toLowerCase().includes(searchTerm.toLowerCase()));
+    }
+    if (filtered.length === 0) {
+      grid.innerHTML = `
+        <div class="empty-state">
+          <div class="icon">🔍</div>
+          <h3>No results found</h3>
+          <p>Try a different search term.</p>
+        </div>`;
+      return;
+    }
+    grid.innerHTML = filtered.map((g, i) => {
+      const tagClass = getCategoryColor(g.category);
+      return `
+        <div class="content-item guide-card">
+          <div class="item-header">
+            <div style="flex:1;">
+              <div class="item-meta">
+                <span class="tag ${tagClass}">${escapeHtml(g.category)}</span>
+              </div>
+              <div style="margin-top:8px;">
+                <div style="font-size:13px;color:#a1a1aa;margin-bottom:6px;">🏆 <strong style="color:#fff;">Best Tools:</strong></div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">
+                  ${g.best_tools.map(t => `<span style="background:linear-gradient(135deg,rgba(254,44,85,0.15),rgba(37,244,238,0.1));border:1px solid rgba(254,44,85,0.3);color:#fff;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:600;">${escapeHtml(t)}</span>`).join('')}
+                </div>
+                <div style="font-size:13px;color:#a1a1aa;margin-bottom:6px;">💡 <strong style="color:#fff;">Why:</strong></div>
+                <div style="font-size:13px;color:#e4e4e7;margin-bottom:12px;line-height:1.5;">${escapeHtml(g.why)}</div>
+                <div style="font-size:13px;color:#a1a1aa;margin-bottom:6px;">🆓 <strong style="color:#fff;">Free Alternative:</strong></div>
+                <div style="font-size:13px;color:#25F4EE;margin-bottom:12px;">${escapeHtml(g.free_alternative)}</div>
+                <div style="font-size:13px;color:#a1a1aa;margin-bottom:6px;">⚡ <strong style="color:#fff;">Pro Tip:</strong></div>
+                <div style="font-size:13px;color:#e4e4e7;font-style:italic;background:#0a0a0b;padding:10px;border-radius:8px;border-left:3px solid #FE2C55;">${escapeHtml(g.tip)}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+    return;
+  }
+
+  if (Array.isArray(data)) {
+    data.forEach((item, idx) => {
+      const itemType = typeof item === 'string' ? 'All' : (item.type || item.category || 'All');
+      if (currentFilter !== 'all' && itemType !== currentFilter) return;
+      if (typeof item === 'string') {
+        items.push({ text: item, category: 'All', _idx: idx });
+      } else {
+        items.push({ ...item, _idx: idx });
+      }
+    });
+  } else {
+    Object.entries(data).forEach(([key, arr]) => {
+      if (currentFilter !== 'all' && key !== currentFilter) return;
+      arr.forEach((item, idx) => {
+        if (typeof item === 'string') {
+          items.push({ text: item, category: key, _idx: idx });
+        } else {
+          items.push({ ...item, category: key, _idx: idx });
+        }
+      });
+    });
+  }
+
+  // Filter by search
+  if (searchTerm) {
+    items = items.filter(item => {
+      const text = item.text || item.template || item.formula || item.example || '';
+      return text.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+  }
+
+  if (items.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <div class="icon">🔍</div>
+        <h3>No results found</h3>
+        <p>Try a different search term or filter.</p>
+      </div>`;
+    return;
+  }
+
+  const tagColors = ['pink', 'cyan', 'gold', 'green', 'purple', 'pink'];
+
+  grid.innerHTML = items.map((item, i) => {
+    const text = item.text || item.template || item.formula || '';
+    const example = item.example ? `<div style="margin-top:6px;font-size:12px;color:#71717a;font-style:italic;">Example: ${item.example}</div>` : '';
+    const meta = SECTIONS[currentSection].tagLabel;
+    const category = item.category || item.type || '';
+    const tagClass = getCategoryColor(category);
+    const isLong = text.length > 100 || text.includes('\n');
+    const isPrompt = currentSection === 'prompts';
+    const universalBadge = isPrompt ? `<span class="tag" style="background:linear-gradient(135deg,rgba(254,44,85,0.15),rgba(37,244,238,0.1));color:#fff;border:1px solid rgba(37,244,238,0.3);">⚡ Universal AI</span>` : '';
+
+    return `
+      <div class="content-item">
+        <div class="item-header">
+          <div style="flex:1;">
+            <div class="item-meta">
+              ${universalBadge}
+              ${category ? `<span class="tag ${tagClass}">${category}</span>` : ''}
+              ${item.duration ? `<span>⏱ ${item.duration}</span>` : ''}
+              ${item.title ? `<span>📄 ${item.title}</span>` : ''}
+            </div>
+            <div class="item-text">${escapeHtml(text)}${example}</div>
+            ${isPrompt ? `<div style="margin-top:8px;font-size:11px;color:#52525b;display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="color:#25F4EE;">✓</span> <strong style="color:#a1a1aa;">Works with:</strong> ChatGPT, Claude, Gemini, DeepSeek, Copilot, Grok &amp; any <strong style="color:#a1a1aa;">text-based AI chatbot</strong> <span style="color:#71717a;">(not for image AI like Midjourney/DALL-E)</span></div>` : ''}
+            ${isLong ? '' : ''}
+          </div>
+          <button class="copy-btn" onclick="copyItem(this, ${JSON.stringify(text).replace(/"/g, '&quot;')})">
+            Copy
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Append bottom upgrade CTA after the grid (only if not in AI tool guide)
+  if (currentSection !== 'ai_tool_guide' && items.length > 0) {
+    grid.innerHTML += `
+      <div style="margin-top:24px;padding:24px;background:linear-gradient(135deg,rgba(254,44,85,0.08),rgba(37,244,238,0.05));border:1px solid rgba(254,44,85,0.25);border-radius:16px;text-align:center;">
+        <div style="font-size:32px;margin-bottom:8px;">🔓</div>
+        <h3 style="color:#fff;font-size:18px;font-weight:700;margin-bottom:8px;">Want more? Get all 1,653 resources</h3>
+        <p style="color:#a1a1aa;font-size:13.5px;margin-bottom:8px;line-height:1.5;">You're seeing only 10% of the full kit. Upgrade to unlock everything, plus the Random Generator and Favorites system.</p>
+        <p style="color:#FE2C55;font-size:13px;font-weight:600;margin-bottom:16px;">🔥 Launch offer: <del style="opacity:0.6;">$24</del> <strong>$18.00</strong> — first 50 customers only</p>
+        <a href="https://shakweer3.gumroad.com/l/TikTok-Creator-Kit" id="bottomCta" style="display:inline-block;background:linear-gradient(135deg,#FE2C55,#ff406b);color:#fff;padding:12px 28px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;box-shadow:0 4px 14px rgba(254,44,85,0.3);">🔥 Get Launch Price — $18.00 →</a>
+      </div>
+    `;
+  }
+}
+
+// Full version counts for comparison
+const FULL_COUNTS = {
+  hooks: 302,
+  prompts: 150,
+  scripts: 40,
+  ideas: 200,
+  hashtags: 497,
+  formulas: 75,
+  bios: 25,
+  captions: 50,
+  ctas: 30,
+  ai_tool_guide: 9
+};
+
+function updateStatBar() {
+  const data = DATA[currentSection];
+  let total = 0;
+  if (currentSection === 'ai_tool_guide') {
+    total = (DATA.ai_tool_guide || []).length;
+  } else if (Array.isArray(data)) {
+    total = data.length;
+  } else {
+    total = Object.values(data).reduce((s, a) => s + (Array.isArray(a) ? a.length : 0), 0);
+  }
+
+  const fullCount = FULL_COUNTS[currentSection] || 0;
+  const hiddenCount = fullCount - total;
+  const percent = fullCount > 0 ? Math.round((total / fullCount) * 100) : 0;
+
+  // Update progress bar
+  const progressEl = document.getElementById('demoProgress');
+  const progressFill = document.getElementById('progressFill');
+  const progressLabel = document.getElementById('progressLabel');
+  if (progressEl && progressFill && progressLabel) {
+    if (fullCount > 0) {
+      progressEl.style.display = 'block';
+      progressFill.style.width = percent + '%';
+      progressLabel.textContent = percent + '% (showing ' + total + ' of ' + fullCount + ')';
+    } else {
+      progressEl.style.display = 'none';
+    }
+  }
+
+  if (fullCount > 0 && currentSection !== 'ai_tool_guide') {
+    document.getElementById('statBar').innerHTML = `
+      <span class="stat-pill">👀 Showing: <strong style="color:#FE2C55;">${total}</strong> of <strong>${fullCount}</strong> (${percent}% demo)</span>
+      <a href="https://shakweer3.gumroad.com/l/TikTok-Creator-Kit" target="_blank" rel="noopener" style="text-decoration:none;cursor:pointer;"><span class="stat-pill accent" style="display:inline-flex;align-items:center;gap:4px;">🔒 <strong>${hiddenCount}</strong> more in Full Kit →</span></a>
+    `;
+  } else if (currentSection === 'ai_tool_guide') {
+    document.getElementById('statBar').innerHTML = `
+      <span class="stat-pill">👀 Showing: <strong style="color:#FE2C55;">${total}</strong> of <strong>${fullCount}</strong> (${Math.round((total/fullCount)*100)}% demo)</span>
+      <a href="https://shakweer3.gumroad.com/l/TikTok-Creator-Kit" target="_blank" rel="noopener" style="text-decoration:none;cursor:pointer;"><span class="stat-pill accent" style="display:inline-flex;align-items:center;gap:4px;">🔒 <strong>${fullCount - total}</strong> more in Full Kit →</span></a>
+    `;
+  } else {
+    document.getElementById('statBar').innerHTML = `
+      <span class="stat-pill">Showing: <strong>${total}</strong> items</span>
+      <span class="stat-pill accent">Demo version — limited to ~10% of full content</span>
+    `;
+  }
+}
+
+function setFilter(f) {
+  currentFilter = f;
+  render();
+}
+
+// Section icons mapping
+const SECTION_ICONS = {
+  hooks: '🪝',
+  prompts: '🤖',
+  scripts: '🎬',
+  ideas: '💡',
+  hashtags: '#',
+  formulas: '📝',
+  bios: '📱',
+  captions: '✍️',
+  ctas: '📣',
+  ai_tool_guide: '🤖'
+};
+
+function setSection(s) {
+  if (!s || !SECTIONS[s]) return; // guard against undefined / invalid sections
+  currentSection = s;
+  currentFilter = 'all';
+  searchTerm = '';
+  document.getElementById('searchInput').value = '';
+  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+  const navBtn = document.querySelector(`[data-section="${s}"]`);
+  if (navBtn) navBtn.classList.add('active');
+  // Update section info banner with description
+  const banner = document.getElementById('sectionInfoBanner');
+  const iconEl = document.getElementById('sectionInfoIcon');
+  const contentEl = document.getElementById('sectionInfoContent');
+  if (banner && contentEl && SECTIONS[s] && SECTIONS[s].description) {
+    iconEl.textContent = SECTION_ICONS[s] || '💡';
+    contentEl.innerHTML = SECTIONS[s].description;
+    banner.style.display = 'flex';
+  } else if (banner) {
+    banner.style.display = 'none';
+  }
+  render();
+  if (window.innerWidth <= 768) toggleSidebar(false);
+}
+
+function copyItem(btn, text) {
+  copyToClipboard(text).then(() => {
+    btn.classList.add('copied');
+    btn.textContent = '✓ Copied!';
+    showToast('Copied to clipboard');
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.textContent = 'Copy';
+    }, 2000);
+  }).catch(() => showToast('Copy failed - try long-press'));
+}
+
+// ============ UNIVERSAL CLIPBOARD FUNCTION (works on mobile + desktop + file://) ============
+function copyToClipboard(text) {
+  return new Promise((resolve, reject) => {
+    if (navigator.clipboard && navigator.clipboard.writeText && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(resolve).catch(() => {
+        fallbackCopy(text, resolve, reject);
+      });
+    } else {
+      fallbackCopy(text, resolve, reject);
+    }
+  });
+}
+
+function fallbackCopy(text, resolve, reject) {
+  try {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.setAttribute('readonly', '');
+    textarea.setAttribute('inputmode', 'none');
+    textarea.style.position = 'fixed';
+    textarea.style.left = '-9999px';
+    textarea.style.top = '0';
+    textarea.style.width = '2em';
+    textarea.style.height = '2em';
+    textarea.style.padding = '0';
+    textarea.style.border = 'none';
+    textarea.style.outline = 'none';
+    textarea.style.boxShadow = 'none';
+    textarea.style.background = 'transparent';
+    textarea.style.fontSize = '16px';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    textarea.setSelectionRange(0, text.length);
+    const successful = document.execCommand('copy');
+    document.body.removeChild(textarea);
+    if (successful) {
+      resolve();
+    } else {
+      reject(new Error('execCommand copy failed'));
+    }
+  } catch (err) {
+    reject(err);
+  }
+}
+
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2000);
+}
+
+// ============ LOCKED SECTION MODAL ============
+function showLockedSection(title, icon, description) {
+  const modal = document.getElementById('lockedModal');
+  document.getElementById('lockedModalTitle').textContent = title;
+  document.getElementById('lockedModalIcon').textContent = icon;
+  document.getElementById('lockedModalDesc').textContent = description;
+  modal.classList.add('show');
+}
+function closeLockedModal() {
+  document.getElementById('lockedModal').classList.remove('show');
+}
+
+function escapeHtml(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+// ============ FIXED COLOR MAPPING PER CATEGORY ============
+const CATEGORY_COLOR_MAP = {
+  // Hooks (6 categories)
+  'curiosity': 'pink',
+  'contrarian': 'gold',
+  'list': 'green',
+  'story': 'purple',
+  'problem': 'cyan',
+  'shocking': 'pink',
+
+  // AI Prompts (9 categories)
+  'idea_generation': 'pink',
+  'script_writing': 'cyan',
+  'hook_creation': 'gold',
+  'caption_writing': 'green',
+  'hashtag_research': 'purple',
+  'trend_analysis': 'pink',
+  'bio_optimization': 'cyan',
+  'cta_creation': 'gold',
+  'storytelling': 'green',
+
+  // Content Ideas (6 categories)
+  'trend_jacking': 'pink',
+  'educational': 'cyan',
+  'behind_the_scenes': 'gold',
+  'listicle': 'purple',
+  'controversial': 'pink',
+
+  // Hashtag Niches (10)
+  'business': 'pink',
+  'fitness': 'cyan',
+  'food': 'gold',
+  'fashion': 'purple',
+  'education': 'green',
+  'tech': 'pink',
+  'travel': 'cyan',
+  'finance': 'gold',
+  'lifestyle': 'purple',
+  'motivation': 'green',
+
+  // Script Types (6)
+  'product_review': 'gold',
+  'tutorial': 'green',
+  'motivational': 'cyan',
+
+  // Bio Types (5)
+  'personal_brand': 'cyan',
+  'creator': 'gold',
+  'local_business': 'green',
+  'coach': 'purple',
+
+  // Title Formula Types (6)
+  'number-based': 'pink',
+  'how-to': 'cyan',
+  'question-based': 'gold',
+  'mistake-based': 'green',
+  'comparison': 'purple',
+  'story-based': 'pink',
+
+  // Caption Types (5)
+  'promotional': 'gold',
+  'engagement': 'green',
+  'trending': 'pink',
+};
+
+function getCategoryColor(category) {
+  if (!category) return 'pink';
+  const cat = String(category).toLowerCase().trim().replace(/\s+/g, '_');
+  return CATEGORY_COLOR_MAP[cat] || 'pink';
+}
+
+function toggleSidebar(force) {
+  const sb = document.getElementById('sidebar');
+  const ov = document.getElementById('overlay');
+  if (force === false) {
+    sb.classList.remove('open');
+    ov.classList.remove('show');
+  } else {
+    sb.classList.toggle('open');
+    ov.classList.toggle('show');
+  }
+}
+
+// ============ EVENT LISTENERS ============
+document.querySelectorAll('.nav-item').forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Locked items use onclick="showLockedSection(...)" instead — skip them
+    if (!btn.dataset.section) return;
+    setSection(btn.dataset.section);
+  });
+});
+
+document.getElementById('searchInput').addEventListener('input', e => {
+  searchTerm = e.target.value;
+  renderContent();
+});
+
+// Init
+setSection('hooks');
+
+// ============ TIMED UPGRADE MODAL ============
+// Show upgrade modal after 30 seconds (only once per session)
+let modalShown = false;
+function showUpgradeModal() {
+  if (modalShown) return;
+  modalShown = true;
+  const modal = document.getElementById('upgradeModal');
+  if (modal) modal.classList.add('show');
+}
+function closeUpgradeModal() {
+  document.getElementById('upgradeModal').classList.remove('show');
+}
+// Trigger after 30 seconds
+setTimeout(showUpgradeModal, 30000);
+</script>
+
+<!-- ============ ABOUT CREATOR + SOCIAL PROOF + FAQ ============ -->
+<style>
+.info-section {
+  max-width: 1100px;
+  margin: 60px auto 40px;
+  padding: 0 24px;
+}
+.info-section h2.section-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+.info-section p.section-sub {
+  text-align: center;
+  color: #a1a1aa;
+  font-size: 14.5px;
+  margin-bottom: 36px;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* About Creator */
+.creator-card {
+  background: linear-gradient(135deg, rgba(254,44,85,0.05), rgba(37,244,238,0.04));
+  border: 1px solid #27272a;
+  border-radius: 20px;
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 24px;
+  align-items: center;
+}
+.creator-avatar {
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FE2C55, #25F4EE);
+  display: grid; place-items: center;
+  font-size: 44px; font-weight: 800; color: #fff;
+  letter-spacing: -1px;
+  box-shadow: 0 8px 24px rgba(254,44,85,0.25);
+}
+.creator-card h3 {
+  color: #fff; font-size: 20px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.01em;
+}
+.creator-card .creator-role {
+  color: #25F4EE; font-size: 13px; font-weight: 600; margin-bottom: 10px;
+}
+.creator-card p {
+  color: #d4d4d8; font-size: 14px; line-height: 1.65; margin-bottom: 12px;
+}
+.creator-stats {
+  display: flex; gap: 24px; flex-wrap: wrap;
+  padding-top: 12px; border-top: 1px solid #27272a;
+}
+.creator-stat strong { display: block; color: #FE2C55; font-size: 20px; font-weight: 800; }
+.creator-stat span { color: #71717a; font-size: 12px; }
+
+/* Social proof */
+.proof-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.proof-card {
+  background: #111113;
+  border: 1px solid #27272a;
+  border-radius: 14px;
+  padding: 22px;
+}
+.proof-card .proof-icon { font-size: 28px; margin-bottom: 10px; }
+.proof-card h4 { color: #fff; font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.proof-card p { color: #a1a1aa; font-size: 13px; line-height: 1.55; }
+
+.trust-row {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  padding: 20px; background: #111113; border: 1px solid #27272a; border-radius: 14px;
+}
+.trust-pill {
+  display: flex; align-items: center; gap: 8px;
+  color: #d4d4d8; font-size: 13.5px; font-weight: 500;
+}
+.trust-pill .check { color: #22c55e; font-weight: 800; }
+
+/* FAQ */
+.faq-list { max-width: 760px; margin: 0 auto; }
+.faq-item {
+  background: #111113;
+  border: 1px solid #27272a;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.faq-q {
+  width: 100%;
+  text-align: left;
+  padding: 18px 20px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  font-family: inherit;
+}
+.faq-q .arrow { color: #FE2C55; transition: transform .2s; font-size: 18px; flex-shrink: 0; }
+.faq-q.open .arrow { transform: rotate(45deg); }
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .25s ease, padding .25s ease;
+  padding: 0 20px;
+  color: #a1a1aa;
+  font-size: 13.5px;
+  line-height: 1.65;
+}
+.faq-a.open { max-height: 400px; padding: 0 20px 18px; }
+
+@media (max-width: 720px) {
+  .creator-card { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+  .creator-stats { justify-content: center; }
+  .info-section { padding: 0 14px; }
+}
+</style>
+
+<section class="info-section" id="about">
+  <h2 class="section-title">Meet the Creator</h2>
+  <p class="section-sub">Built by a TikTok creator who actually posts — not a marketer selling theory.</p>
+
+  <div class="creator-card">
+    <div class="creator-avatar">M</div>
+    <div>
+      <h3>Muhannad Shakweer</h3>
+      <div class="creator-role">TikTok Creator · Content Strategist</div>
+      <p>I built this kit after 2+ years of testing, breaking, and re-engineering what actually works on TikTok. Every hook, prompt, and script in here was used on real videos — not generated in a vacuum.</p>
+      <p>My goal was simple: package everything I've learned into one searchable dashboard so you stop wasting hours scrolling for ideas and start posting content that performs.</p>
+      <div class="creator-stats">
+        <div class="creator-stat"><strong>1,653</strong><span>Curated resources</span></div>
+        <div class="creator-stat"><strong>2+ yrs</strong><span>TikTok experience</span></div>
+        <div class="creator-stat"><strong>2026</strong><span>Fully updated</span></div>
+        <div class="creator-stat"><strong>Lifetime</strong><span>Free updates</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="info-section" id="proof">
+  <h2 class="section-title">Why this kit actually works</h2>
+  <p class="section-sub">This isn't a random dump of templates. It's a system built around how the TikTok algorithm actually pushes content in 2026.</p>
+
+  <div class="proof-grid">
+    <div class="proof-card">
+      <div class="proof-icon">🪝</div>
+      <h4>Built on real hook testing</h4>
+      <p>302 hooks organized by the 6 psychological triggers that stop scrolls. Each one modeled after patterns that performed on real TikTok videos.</p>
+    </div>
+    <div class="proof-card">
+      <div class="proof-icon">📊</div>
+      <h4>Aligned with the 2026 algorithm</h4>
+      <p>The included Algorithm Cheatsheet explains the signals TikTok now weights — watch time, completion, replays, saves, shares — and how to engineer them.</p>
+    </div>
+    <div class="proof-card">
+      <div class="proof-icon">🤖</div>
+      <h4>Tested with every major AI</h4>
+      <p>All 150 AI prompts work with ChatGPT, Claude, Gemini, DeepSeek, Copilot, and Grok — verified output, not generic "write me a TikTok" requests.</p>
+    </div>
+    <div class="proof-card">
+      <div class="proof-icon">🎯</div>
+      <h4>Niche-agnostic by design</h4>
+      <p>Scripts, ideas, and captions adapt to any niche — fitness, finance, gaming, beauty, faceless, B2B. Pick a template, swap the topic, post.</p>
+    </div>
+  </div>
+
+  <div class="trust-row">
+    <div class="trust-pill"><span class="check">✓</span> Instant delivery</div>
+    <div class="trust-pill"><span class="check">✓</span> Works on mobile &amp; desktop</div>
+    <div class="trust-pill"><span class="check">✓</span> Lifetime free updates</div>
+    <div class="trust-pill"><span class="check">✓</span> Pay once, own forever</div>
+    <div class="trust-pill"><span class="check">✓</span> Secure checkout via Gumroad</div>
+  </div>
+</section>
+
+<section class="info-section" id="faq">
+  <h2 class="section-title">Frequently Asked Questions</h2>
+  <p class="section-sub">Everything you need to know before you unlock the full kit.</p>
+
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>What exactly do I get after I pay?</span><span class="arrow">+</span></button>
+      <div class="faq-a"><p>You instantly get the full interactive dashboard with all 1,653 resources — hooks, AI prompts, scripts, ideas, hashtags, captions, the algorithm cheatsheet, the 30-day content calendar, and all 5 bonus resources. Plus the Random Generator and Favorites system. Delivered as a single HTML file that opens in any browser — no install, no login.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>Does it work on mobile?</span><span class="arrow">+</span></button>
+      <div class="faq-a"><p>Yes. The dashboard is fully responsive — works on iPhone, Android, tablet, and desktop. You can search, copy, and use the generator from any device.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>How are the AI prompts different from what I'd write myself?</span><span class="arrow">+</span></button>
+      <div class="faq-a"><p>Each prompt is engineered with role context, output structure, tone, and constraints — so the AI returns a usable TikTok asset, not generic fluff. They've been tested across ChatGPT, Claude, Gemini, DeepSeek, Copilot, and Grok to ensure consistent results.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>What if my niche isn't covered?</span><span class="arrow">+</span></button>
+      <div class="faq-a"><p>Every resource is niche-agnostic by design. The hooks, scripts, and ideas use proven frameworks that adapt to your topic. Just plug in your niche — fitness, finance, beauty, gaming, faceless, B2B, education — and the same template works.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>How fast can I start using it?</span><span class="arrow">+</span></button>
+      <div class="faq-a"><p>Instantly. The moment your payment goes through, Gumroad emails you the download link. Open the file in any browser — no install, no login — and you're ready to plan your next TikTok within 5 minutes.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>How is this different from free TikTok advice on YouTube?</span><span class="arrow">+</span></button>
+      <div class="faq-a"><p>YouTube gives you theory. This gives you a searchable, copy-paste library of 1,653 ready-to-use assets. No 20-minute video to find one hook — just open the dashboard, search, copy, post.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>Do I get future updates?</span><span class="arrow">+</span></button>
+      <div class="faq-a"><p>Yes — lifetime updates are included free. As TikTok's algorithm and trends shift, the kit gets updated and you'll receive an email with the new version. No subscription, no extra fees.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>Is the payment secure?</span><span class="arrow">+</span></button>
+      <div class="faq-a"><p>Yes. Checkout is handled by Gumroad — a trusted platform that processes millions of dollars in digital product sales. Your card details never touch my server.</p></div>
+    </div>
+  </div>
+</section>
+
+<script>
+function toggleFaq(btn) {
+  const ans = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  // close all
+  document.querySelectorAll('.faq-q').forEach(q => q.classList.remove('open'));
+  document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+  if (!isOpen) { btn.classList.add('open'); ans.classList.add('open'); }
+}
+</script>
+
+</body>
+</html>
