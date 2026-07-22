@@ -1,1 +1,2395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TikTok Creator Kit — Free Demo</title>
+<meta name="description" content="Free demo of the TikTok Creator Kit. Sample hooks, AI prompts, scripts, hashtags, and more.">
 
+<!-- Favicon (TK mark, matches the in-app logo) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2032%2032%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%23FE2C55%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%2325F4EE%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%2732%27%20height%3D%2732%27%20rx%3D%278%27%20fill%3D%27url%28%23g%29%27/%3E%3Cpath%20d%3D%27M18.6%206.2c.35%202%201.75%203.4%203.75%203.65v2.9c-1.4%200-2.7-.45-3.75-1.2v5.9a4.85%204.85%200%201%201-4.25-4.85v2.95a1.9%201.9%200%201%200%201.4%201.85V6.2h2.85Z%27%20fill%3D%27%23fff%27/%3E%3C/svg%3E">
+
+<!-- Open Graph tags: control how the link looks when shared on WhatsApp, Facebook, iMessage, etc. -->
+<meta property="og:title" content="TikTok Creator Kit — Free Demo (1,650+ Resources)">
+<meta property="og:description" content="Try 127 free sample resources — hooks, AI prompts, scripts, hashtags. No signup required.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mohannadshakweer.github.io/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TikTok Creator Kit — Free Demo">
+<meta name="twitter:description" content="Try 127 free sample resources — hooks, AI prompts, scripts, hashtags. No signup required.">
+
+<!-- Pinterest domain verification -->
+<meta name="p:domain_verify" content="812b32e5f4521d9d4666834a4ffffe52"/>
+
+<style>
+/* ============ RESET & BASE ============ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, Helvetica, Arial, sans-serif;
+  color: #e4e4e7;
+  background: #0a0a0b;
+  line-height: 1.6;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+input { font-family: inherit; }
+
+/* ============ SCROLLBAR ============ */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #18181b; }
+::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: #52525b; }
+
+/* ============ LAYOUT ============ */
+.app {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+/* ============ SIDEBAR ============ */
+.sidebar {
+  background: #111113;
+  border-right: 1px solid #1f1f23;
+  padding: 24px 16px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 700; font-size: 16px;
+  color: #fff;
+  margin-bottom: 32px;
+  padding: 0 8px;
+}
+.logo-mark {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, #FE2C55, #25F4EE);
+  border-radius: 8px;
+  display: grid; place-items: center;
+  color: #fff; font-size: 13px; font-weight: 800;
+}
+.demo-badge {
+  display: inline-block;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.08em;
+  background: rgba(254,44,85,0.15);
+  color: #FE2C55;
+  padding: 3px 8px; border-radius: 999px;
+  margin-left: auto;
+}
+.nav-section {
+  margin-bottom: 8px;
+}
+.nav-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #52525b;
+  padding: 12px 12px 8px;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #a1a1aa;
+  cursor: pointer;
+  transition: all .15s;
+  font-weight: 500;
+  width: 100%;
+  text-align: left;
+}
+.nav-item:hover {
+  background: #18181b;
+  color: #fff;
+}
+.nav-item.active {
+  background: linear-gradient(135deg, rgba(254,44,85,0.15), rgba(37,244,238,0.1));
+  color: #fff;
+  border: 1px solid rgba(254,44,85,0.3);
+}
+.nav-item .icon {
+  font-size: 16px;
+  width: 20px; text-align: center;
+}
+.nav-item .icon.locked-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px;
+  border-radius: 7px;
+  background: linear-gradient(135deg, rgba(254,44,85,0.16), rgba(37,244,238,0.1));
+  color: #FE2C55;
+  flex-shrink: 0;
+}
+.nav-item.locked-item:hover .icon.locked-icon {
+  background: linear-gradient(135deg, rgba(254,44,85,0.28), rgba(37,244,238,0.18));
+  color: #ff5577;
+}
+.nav-item .count {
+  margin-left: auto;
+  font-size: 11px;
+  color: #52525b;
+  background: #18181b;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+.nav-item.active .count {
+  background: rgba(254,44,85,0.2);
+  color: #FE2C55;
+}
+
+.upgrade-card {
+  margin-top: 16px;
+  padding: 18px;
+  background: linear-gradient(135deg, rgba(254,44,85,0.15), rgba(37,244,238,0.08));
+  border: 2px solid rgba(254,44,85,0.4);
+  border-radius: 14px;
+  text-align: center;
+  position: relative;
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(254,44,85,0); }
+  50% { box-shadow: 0 0 20px 2px rgba(254,44,85,0.2); }
+}
+
+/* Bonus teaser banner — made to stand out from surrounding content */
+.bonus-teaser-btn {
+  animation: bonusTeaserPulse 2.2s ease-in-out infinite;
+}
+@keyframes bonusTeaserPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(254,44,85,0.25); border-color: rgba(254,44,85,0.45); }
+  50% { box-shadow: 0 0 22px 4px rgba(254,44,85,0.4); border-color: rgba(254,44,85,0.9); }
+}
+.bonus-teaser-arrow {
+  display: inline-block;
+  animation: bonusArrowNudge 1.4s ease-in-out infinite;
+}
+@keyframes bonusArrowNudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
+}
+
+/* Mobile hamburger — draws the eye so mobile visitors actually open the sidebar */
+.mobile-menu-btn {
+  position: relative;
+  animation: menuBtnGlow 2.2s ease-in-out infinite;
+}
+.mobile-menu-btn::after {
+  content: '';
+  position: absolute;
+  top: -3px; right: -3px;
+  width: 11px; height: 11px;
+  background: #FE2C55;
+  border-radius: 50%;
+  border: 2px solid #111113;
+  animation: menuDotPing 1.6s ease-in-out infinite;
+}
+@keyframes menuBtnGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(254,44,85,0.3); border-color: #27272a; }
+  50% { box-shadow: 0 0 14px 3px rgba(254,44,85,0.45); border-color: rgba(254,44,85,0.8); }
+}
+@keyframes menuDotPing {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.35); opacity: 0.6; }
+}
+/* Once the visitor has opened the menu once, the attention-grabber has done its job — turn it off for good */
+.mobile-menu-btn.menu-btn-seen { animation: none; box-shadow: none; border-color: #27272a; }
+.mobile-menu-btn.menu-btn-seen::after { display: none; content: none; animation: none; }
+
+/* Explicit tooltip label pointing at the hamburger — spells out that there's important content behind it */
+.menu-hint {
+  position: absolute;
+  top: 46px; left: 16px;
+  background: linear-gradient(135deg,#FE2C55,#ff406b);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 11px;
+  border-radius: 8px;
+  white-space: nowrap;
+  box-shadow: 0 6px 16px rgba(254,44,85,0.4);
+  z-index: 51;
+  animation: menuHintBounce 1.8s ease-in-out infinite;
+}
+.menu-hint::before {
+  content: '';
+  position: absolute;
+  top: -5px; left: 14px;
+  width: 0; height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #FE2C55;
+}
+.menu-hint.hide { display: none; }
+@keyframes menuHintBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.upgrade-card h4 {
+  font-size: 14px; font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.upgrade-card .upgrade-emoji {
+  font-size: 28px;
+  margin-bottom: 6px;
+  display: block;
+}
+.upgrade-card p {
+  font-size: 12px;
+  color: #d4d4d8;
+  margin-bottom: 14px;
+  line-height: 1.45;
+}
+.upgrade-card .price-tag {
+  display: inline-block;
+  background: #fff;
+  color: #FE2C55;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+.upgrade-btn {
+  display: block;
+  width: 100%;
+  background: linear-gradient(135deg, #FE2C55, #ff406b);
+  color: #fff;
+  font-size: 13px; font-weight: 800;
+  padding: 12px 12px;
+  border-radius: 10px;
+  text-align: center;
+  transition: transform .15s, box-shadow .2s;
+  box-shadow: 0 4px 12px rgba(254,44,85,0.3);
+  position: relative;
+}
+.upgrade-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(254,44,85,0.4);
+}
+.upgrade-arrow {
+  position: absolute;
+  top: -8px; right: 10px;
+  font-size: 24px;
+  animation: bounce 1.5s infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* ============ MAIN ============ */
+.main {
+  padding: 32px 40px;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+@media (max-width: 1024px) {
+  .main { padding: 24px 20px; }
+}
+
+.main-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 24px;
+  flex-wrap: wrap; gap: 16px;
+}
+.main-title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.main-subtitle {
+  font-size: 14px;
+  color: #71717a;
+}
+.demo-watermark {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(254,44,85,0.1);
+  border: 1px solid rgba(254,44,85,0.3);
+  color: #FE2C55;
+  font-size: 12px; font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+
+/* ============ SEARCH ============ */
+.search-bar {
+  position: relative;
+  margin-bottom: 20px;
+  max-width: 500px;
+}
+.search-bar input {
+  width: 100%;
+  background: #18181b;
+  border: 1px solid #27272a;
+  color: #fff;
+  padding: 12px 16px 12px 44px;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color .2s;
+}
+.search-bar input:focus { border-color: #FE2C55; }
+.search-bar input::placeholder { color: #52525b; }
+.search-bar .search-icon {
+  position: absolute;
+  left: 14px; top: 50%;
+  transform: translateY(-50%);
+  color: #52525b;
+  font-size: 16px;
+}
+
+/* ============ FILTERS ============ */
+.filters {
+  display: flex; gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.filter-chip {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #18181b;
+  border: 1px solid #27272a;
+  color: #a1a1aa;
+  cursor: pointer;
+  transition: all .15s;
+}
+.filter-chip:hover { color: #fff; border-color: #52525b; }
+.filter-chip.active {
+  background: #FE2C55;
+  border-color: #FE2C55;
+  color: #fff;
+}
+
+/* ============ CONTENT GRID ============ */
+.content-grid {
+  display: grid;
+  gap: 12px;
+}
+.content-item {
+  background: #18181b;
+  border: 1px solid #27272a;
+  border-radius: 12px;
+  padding: 16px 20px;
+  transition: all .2s;
+  position: relative;
+}
+.content-item:hover {
+  border-color: #FE2C55;
+  transform: translateY(-1px);
+}
+.content-item .item-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.content-item .item-text {
+  flex: 1;
+  color: #e4e4e7;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.content-item .item-text.long {
+  white-space: pre-wrap;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 12.5px;
+  background: #0a0a0b;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #27272a;
+  margin-top: 8px;
+}
+.content-item .item-meta {
+  font-size: 11px;
+  color: #71717a;
+  margin-bottom: 8px;
+  display: flex; gap: 12px;
+  flex-wrap: wrap;
+}
+.content-item .tag {
+  background: rgba(37,244,238,0.1);
+  color: #25F4EE;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.content-item .tag.pink { background: rgba(254,44,85,0.1); color: #FE2C55; }
+.content-item .tag.gold { background: rgba(250,204,21,0.1); color: #facc15; }
+.content-item .tag.green { background: rgba(34,197,94,0.1); color: #22c55e; }
+.content-item .tag.purple { background: rgba(168,85,247,0.1); color: #a855f7; }
+
+.copy-btn {
+  flex-shrink: 0;
+  background: rgba(37,244,238,0.1);
+  border: 1px solid rgba(37,244,238,0.3);
+  color: #25F4EE;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all .15s;
+}
+.copy-btn:hover {
+  background: rgba(37,244,238,0.2);
+  transform: scale(1.05);
+}
+.copy-btn.copied {
+  background: rgba(34,197,94,0.15);
+  border-color: rgba(34,197,94,0.4);
+  color: #22c55e;
+}
+
+/* ============ EMPTY STATE ============ */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #71717a;
+}
+.empty-state .icon { font-size: 48px; margin-bottom: 16px; }
+.empty-state h3 { font-size: 18px; color: #a1a1aa; margin-bottom: 8px; }
+.empty-state p { font-size: 14px; }
+
+/* ============ TOAST ============ */
+.toast {
+  position: fixed;
+  bottom: 24px; left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #FE2C55, #25F4EE);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 9999;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  animation: slideUp .3s ease;
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translate(-50%, 20px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* ============ MOBILE ============ */
+.mobile-header {
+  display: none;
+  position: relative;
+  background: #111113;
+  border-bottom: 1px solid #1f1f23;
+  padding: 12px 16px;
+  position: sticky; top: 0; z-index: 50;
+}
+.mobile-header .logo { margin: 0; }
+.sticky-unlock-bar { display: none; } /* hidden by default; media query below shows it on mobile */
+.mobile-menu-btn {
+  background: #18181b;
+  border: 1px solid #27272a;
+  color: #fff;
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  font-size: 18px;
+  display: grid; place-items: center;
+}
+
+@media (max-width: 768px) {
+  .app { grid-template-columns: 1fr; }
+  .sidebar {
+    position: fixed;
+    top: 0; left: -280px;
+    width: 280px;
+    z-index: 100;
+    transition: left .3s;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.4);
+  }
+  .sidebar.open { left: 0; }
+  .mobile-header { display: flex; justify-content: space-between; align-items: center; }
+  .main { padding: 20px 16px; }
+  .main-title { font-size: 22px; }
+  .main { padding-bottom: 84px; } /* room for sticky bar so it never covers content */
+  .sticky-unlock-bar { display: flex; }
+}
+
+/* ============ STICKY MOBILE UNLOCK BAR ============ */
+.sticky-unlock-bar {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 120;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  padding-bottom: calc(10px + env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, rgba(17,17,19,0.85), #111113 40%);
+  border-top: 1px solid rgba(254,44,85,0.35);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 -6px 20px rgba(0,0,0,0.35);
+}
+.sticky-unlock-bar .su-icon { font-size: 20px; flex-shrink: 0; }
+.sticky-unlock-bar .su-text { flex: 1; font-size: 12px; color: #d4d4d8; line-height: 1.35; }
+.sticky-unlock-bar .su-text strong { color: #fff; }
+.sticky-unlock-bar .su-btn {
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #FE2C55, #ff406b);
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 800;
+  padding: 10px 14px;
+  border-radius: 10px;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(254,44,85,0.35);
+  animation: bonusTeaserPulse 2.2s ease-in-out infinite;
+}
+
+/* ============ TOP BAR (mobile back) ============ */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 90;
+}
+.overlay.show { display: block; }
+
+/* ============ STAT BAR ============ */
+.stat-bar {
+  display: flex; gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.stat-pill {
+  background: #18181b;
+  border: 1px solid #27272a;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: #a1a1aa;
+}
+.stat-pill strong { color: #fff; font-weight: 700; }
+.stat-pill.accent { color: #25F4EE; border-color: rgba(37,244,238,0.3); }
+</style>
+</head>
+<body>
+
+<!-- Mobile header -->
+<div class="mobile-header">
+  <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+  <div class="menu-hint" id="menuHint">👆 Tap — all the bonuses are in here</div>
+  <div class="logo">
+    <span class="logo-mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M16.6 2.8c.4 2.3 2 3.9 4.3 4.2v3.3c-1.6 0-3.1-.5-4.3-1.4v6.8a5.6 5.6 0 1 1-4.9-5.6v3.4a2.2 2.2 0 1 0 1.6 2.1V2.8h3.3Z"/></svg></span>
+    <span>TikTok Creator Kit</span>
+    <span class="demo-badge">DEMO</span>
+  </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+<!-- Sticky mobile bar: stays visible while scrolling so the offer is always one tap away -->
+<button class="sticky-unlock-bar" onclick="showUpgradeModal();">
+  <span class="su-icon">🔒</span>
+  <span class="su-text"><strong>5 bonus resources</strong> locked — unlock everything</span>
+  <span class="su-btn">Unlock $18 →</span>
+</button>
+
+<div class="app">
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="logo">
+      <span class="logo-mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M16.6 2.8c.4 2.3 2 3.9 4.3 4.2v3.3c-1.6 0-3.1-.5-4.3-1.4v6.8a5.6 5.6 0 1 1-4.9-5.6v3.4a2.2 2.2 0 1 0 1.6 2.1V2.8h3.3Z"/></svg></span>
+      <span>TikTok Creator Kit</span>
+      <span class="demo-badge">DEMO</span>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Content</div>
+      <button class="nav-item active" data-section="hooks">
+        <span class="icon">🪝</span> Hooks <span class="count">30 <span style="color:#52525b;">/ 302</span></span>
+      </button>
+      <button class="nav-item" data-section="prompts">
+        <span class="icon">🤖</span> AI Prompts <span class="count">18 <span style="color:#52525b;">/ 150</span></span>
+      </button>
+      <button class="nav-item" data-section="scripts">
+        <span class="icon">🎬</span> Scripts <span class="count">5 <span style="color:#52525b;">/ 40</span></span>
+      </button>
+      <button class="nav-item" data-section="ideas">
+        <span class="icon">💡</span> Ideas <span class="count">24 <span style="color:#52525b;">/ 200</span></span>
+      </button>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Optimization</div>
+      <button class="nav-item" data-section="hashtags">
+        <span class="icon">#</span> Hashtags <span class="count">30 <span style="color:#52525b;">/ 497</span></span>
+      </button>
+      <button class="nav-item" data-section="formulas">
+        <span class="icon">📝</span> Title Formulas <span class="count">8 <span style="color:#52525b;">/ 75</span></span>
+      </button>
+      <button class="nav-item" data-section="bios">
+        <span class="icon">📱</span> Bio Templates <span class="count">3 <span style="color:#52525b;">/ 25</span></span>
+      </button>
+      <button class="nav-item" data-section="captions">
+        <span class="icon">✍️</span> Captions <span class="count">6 <span style="color:#52525b;">/ 50</span></span>
+      </button>
+      <button class="nav-item" data-section="ctas">
+        <span class="icon">📣</span> CTAs <span class="count">3 <span style="color:#52525b;">/ 30</span></span>
+      </button>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">AI Tools</div>
+      <button class="nav-item" data-section="ai_tool_guide">
+        <span class="icon">🤖</span> AI Tool Guide <span class="count">3</span>
+      </button>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Bonus Resources <span style="font-size:9px;background:rgba(254,44,85,0.2);color:#FE2C55;padding:2px 6px;border-radius:999px;margin-left:4px;font-weight:700;">PRO</span></div>
+      <button class="nav-item locked-item" onclick="showLockedSection('Algorithm Cheatsheet', 'chart', '8 sections explaining how TikTok\'s algorithm really works in 2026 — the signals it uses, how videos get pushed, what kills your reach, and what boosts it.')">
+        <span class="icon locked-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="4" height="10"/><rect x="10" y="6" width="4" height="14"/><rect x="16" y="13" width="4" height="7"/></svg></span> Algorithm Cheatsheet <span class="count">🔒</span>
+      </button>
+      <button class="nav-item locked-item" onclick="showLockedSection('Best Posting Times', 'clock', 'Optimal posting times for 10 different niches. Know exactly when to post for maximum reach in your specific niche.')">
+        <span class="icon locked-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg></span> Best Posting Times <span class="count">🔒</span>
+      </button>
+      <button class="nav-item locked-item" onclick="showLockedSection('30-Day Content Calendar', 'calendar', 'A complete 30-day content plan with video type, hook idea, and CTA for every single day. Never wonder what to post again.')">
+        <span class="icon locked-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg></span> 30-Day Calendar <span class="count">🔒</span>
+      </button>
+      <button class="nav-item locked-item" onclick="showLockedSection('Trending Sounds Guide', 'music', '25 sound categories with best use cases and vibes. Use the right sound to boost your reach significantly.')">
+        <span class="icon locked-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg></span> Trending Sounds <span class="count">🔒</span>
+      </button>
+      <button class="nav-item locked-item" onclick="showLockedSection('TikTok Mistakes to Avoid', 'warning', '30 common mistakes that kill TikTok growth — with explanations of why they\'re bad and how to fix them. Great monthly audit checklist.')">
+        <span class="icon locked-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 20h20L12 3z"/><line x1="12" y1="10" x2="12" y2="14"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span> Mistakes to Avoid <span class="count">🔒</span>
+      </button>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">2026 New Additions <span style="font-size:9px;background:linear-gradient(135deg,#FE2C55,#25F4EE);color:#fff;padding:2px 6px;border-radius:999px;margin-left:4px;font-weight:700;">NEW</span></div>
+      <button class="nav-item locked-item" onclick="showLockedSection('TikTok Shop Guide', 'cart', 'Complete guide to TikTok Shop in 2026 — opening a shop, listing products, affiliate marketing, live shopping, and avoiding common mistakes. 12 in-depth tips.')">
+        <span class="icon locked-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h2l2.6 12.6a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L21 7H5.2"/></svg></span> TikTok Shop Guide <span class="count">🔒</span>
+      </button>
+      <button class="nav-item locked-item" onclick="showLockedSection('Trending Sounds Guide 2026', 'music', '26 sounds split into Evergreen classics and Trending 2026 sound types. Know exactly what sounds to use for your niche.')">
+        <span class="icon locked-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg></span> Sounds Guide 2026 <span class="count">🔒</span>
+      </button>
+      <button class="nav-item locked-item" onclick="showLockedSection('How to Find Trending Sounds', 'search', '8 proven methods to find trending sounds BEFORE they blow up. Includes how to predict trends, when to use sounds, and best practices.')">
+        <span class="icon locked-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="20" y1="20" x2="15.5" y2="15.5"/></svg></span> Find Trending Sounds <span class="count">🔒</span>
+      </button>
+      <button class="nav-item locked-item" onclick="showLockedSection('B-Roll Cheat Sheet', 'camera', '100 background footage ideas for faceless creators across 5 categories: screen recordings, object close-ups, ambient shots, text/graphics, and process/setup. Perfect for faceless accounts.')">
+        <span class="icon locked-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3"/></svg></span> B-Roll Cheat Sheet <span class="count">🔒</span>
+      </button>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Ads &amp; Tools <span style="font-size:9px;background:linear-gradient(135deg,#FE2C55,#25F4EE);color:#fff;padding:2px 6px;border-radius:999px;margin-left:4px;font-weight:700;">PRO</span></div>
+      <button class="nav-item locked-item" onclick="showLockedSection('TikTok Ads Templates', 'megaphone', '13 proven TikTok Ads templates for every objective: Spark Ads, In-Feed Ads, TopView, Hashtag Challenges, Carousel, Retargeting, Lead Gen, and more. Each includes duration, structure, and pro tips.')">
+        <span class="icon locked-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4a1 1 0 0 0 1 1h2l4 4V5L6 9H4a1 1 0 0 0-1 1z"/><path d="M15 8a4 4 0 0 1 0 8"/><path d="M18 5a8 8 0 0 1 0 14"/></svg></span> TikTok Ads Templates <span class="count">🔒</span>
+      </button>
+      <button class="nav-item locked-item" onclick="showLockedSection('Hook Generator Tool', 'lightning', 'Interactive tool: pick a template, fill in the blanks, get a custom hook instantly. 8 proven hook templates across curiosity, contrarian, list, story, problem, shocking, question, and mistake categories.')">
+        <span class="icon locked-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 11 14 10 22 21 10 13 10 13 2"/></svg></span> Hook Generator <span class="count">🔒</span>
+      </button>
+      <button class="nav-item locked-item" onclick="showLockedSection('Script Customizer Tool', 'pencil', 'Interactive tool: pick a script type, enter your niche and details, get a custom video script. 6 script types: tutorial, review, story, listicle, comparison, behind-the-scenes.')">
+        <span class="icon locked-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span> Script Customizer <span class="count">🔒</span>
+      </button>
+      <button class="nav-item locked-item" onclick="showLockedSection('Hashtag Analyzer Tool', 'search', 'Interactive tool: enter any hashtag to see estimated reach, competition level, and recommendations. Includes 8 reach patterns and 8 strategy tips for the perfect hashtag mix.')">
+        <span class="icon locked-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="20" y1="20" x2="15.5" y2="15.5"/></svg></span> Hashtag Analyzer <span class="count">🔒</span>
+      </button>
+    </div>
+
+    <div class="upgrade-card">
+      <span class="upgrade-arrow">👆</span>
+      <span class="upgrade-emoji">🔓</span>
+      <h4>Unlock Everything</h4>
+      <span class="price-tag">🔥 Launch: $18.00 (was $24)</span>
+      <p>Get all <strong style="color:#fff;">1,653 resources (2026 Edition)</strong>, Random Generator, Favorites system, and lifetime updates.</p>
+      <a href="https://shakweer3.gumroad.com/l/TikTok-Creator-Kit" class="upgrade-btn">Upgrade to Full Kit →</a>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+    <!-- Top banner: simple, descriptive — introduces the product, no price/CTA here -->
+    <div id="topUpgradeBanner" style="background:linear-gradient(135deg,rgba(254,44,85,0.12),rgba(37,244,238,0.08));border:1px solid rgba(254,44,85,0.35);color:#e4e4e7;padding:12px 20px;border-radius:10px;margin-bottom:18px;display:flex;align-items:center;gap:12px;font-size:13.5px;font-weight:500;">
+      <span style="font-size:18px;flex-shrink:0;">👋</span>
+      <span style="flex:1;line-height:1.45;"><strong style="color:#fff;">This is a free live demo</strong> of the TikTok Creator Kit — explore any section on the left (Hooks, AI Prompts, Scripts, Ideas...) and try the tools.</span>
+      <button onclick="document.getElementById('topUpgradeBanner').style.display='none';" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:#a1a1aa;width:26px;height:26px;border-radius:6px;cursor:pointer;flex-shrink:0;font-size:13px;display:grid;place-items:center;">✕</button>
+    </div>
+
+    <!-- ============ BEFORE / AFTER LIVE EXAMPLE ============ -->
+    <style>
+      .ba-wrap {
+        background: #111113;
+        border: 1px solid #27272a;
+        border-radius: 14px;
+        padding: 18px 20px;
+        margin-bottom: 20px;
+      }
+      .ba-label {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #71717a;
+        margin-bottom: 12px;
+      }
+      .ba-grid {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        gap: 14px;
+        align-items: stretch;
+      }
+      .ba-card {
+        border-radius: 10px;
+        padding: 14px 16px;
+        font-size: 13.5px;
+        line-height: 1.5;
+      }
+      .ba-card.before { background: #18181b; border: 1px solid #27272a; color: #71717a; }
+      .ba-card.after { background: rgba(254,44,85,0.08); border: 1px solid rgba(254,44,85,0.4); color: #f4f4f5; }
+      .ba-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.05em; padding: 2px 8px; border-radius: 999px; margin-bottom: 8px; }
+      .ba-tag.before { background: #27272a; color: #a1a1aa; }
+      .ba-tag.after { background: rgba(254,44,85,0.25); color: #FE2C55; }
+      .ba-arrow { display: flex; align-items: center; justify-content: center; font-size: 20px; color: #FE2C55; }
+      @media (max-width: 640px) {
+        .ba-grid { grid-template-columns: 1fr; }
+        .ba-arrow { transform: rotate(90deg); padding: 2px 0; }
+      }
+    </style>
+    <div class="ba-wrap">
+      <div class="ba-label">🪝 See the difference — same topic, two approaches</div>
+      <div class="ba-grid">
+        <div class="ba-card before">
+          <span class="ba-tag before">GENERIC HOOK</span><br>
+          "Want to grow your TikTok? Here are some tips that can help you get more views."
+        </div>
+        <div class="ba-arrow">→</div>
+        <div class="ba-card after">
+          <span class="ba-tag after">FROM THE KIT</span><br>
+          "Stop posting every day. Here's what actually works..."
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ QUICK ACCESS TABS ============ -->
+    <style>
+      .quick-tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 18px;
+        flex-wrap: wrap;
+      }
+      .quick-tab {
+        flex: 1;
+        min-width: 180px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 16px;
+        border-radius: 12px;
+        font-size: 13.5px;
+        font-weight: 700;
+        cursor: pointer;
+        text-decoration: none;
+        color: #fff;
+        transition: all .2s ease;
+        font-family: inherit;
+        border: 1px solid transparent;
+      }
+      .quick-tab .qt-icon {
+        font-size: 20px;
+        line-height: 1;
+        flex-shrink: 0;
+      }
+      .quick-tab .qt-text {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .quick-tab .qt-text strong {
+        font-size: 13.5px;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+      }
+      .quick-tab .qt-text span {
+        font-size: 11px;
+        font-weight: 500;
+        opacity: 0.85;
+      }
+      .quick-tab.creator {
+        background: linear-gradient(135deg, #8b5cf6, #ec4899);
+        box-shadow: 0 4px 14px rgba(139, 92, 246, 0.3);
+      }
+      .quick-tab.creator:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(139, 92, 246, 0.45);
+      }
+      .quick-tab.faq {
+        background: linear-gradient(135deg, #06b6d4, #3b82f6);
+        box-shadow: 0 4px 14px rgba(6, 182, 212, 0.3);
+      }
+      .quick-tab.faq:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(6, 182, 212, 0.45);
+      }
+      @media (max-width: 640px) {
+        .quick-tab { min-width: 100%; }
+      }
+    </style>
+
+    <div class="quick-tabs">
+      <a href="#about" class="quick-tab creator" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth', block:'start'}); return false;">
+        <span class="qt-icon">👤</span>
+        <span class="qt-text">
+          <strong>Meet the Creator</strong>
+          <span>Who built this kit & why</span>
+        </span>
+      </a>
+      <a href="#faq" class="quick-tab faq" onclick="document.getElementById('faq').scrollIntoView({behavior:'smooth', block:'start'}); return false;">
+        <span class="qt-icon">❓</span>
+        <span class="qt-text">
+          <strong>FAQ</strong>
+          <span>Quick answers before you buy</span>
+        </span>
+      </a>
+    </div>
+
+    <!-- Bonus teaser card: visible in MAIN content on every device (mobile sidebar is hidden by default, so this is how mobile visitors see what's locked) -->
+    <button onclick="showUpgradeModal();" class="bonus-teaser-btn" style="display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:linear-gradient(135deg,rgba(254,44,85,0.22),rgba(37,244,238,0.1));border:2px solid rgba(254,44,85,0.6);border-radius:12px;padding:16px 18px;margin-bottom:20px;font-family:inherit;cursor:pointer;">
+      <span style="font-size:24px;flex-shrink:0;">🔒</span>
+      <span style="flex:1;font-size:14px;color:#f4f4f5;line-height:1.5;">
+        <strong style="color:#fff;">5 bonus resources + 4 interactive tools</strong> are locked in this demo (Algorithm Cheatsheet, Hook Generator, Script Customizer &amp; more).
+      </span>
+      <span style="flex-shrink:0;color:#FE2C55;font-weight:800;font-size:13.5px;white-space:nowrap;">See what's inside <span class="bonus-teaser-arrow">→</span></span>
+    </button>
+
+    <div class="main-header">
+      <div>
+        <h1 class="main-title" id="mainTitle">Hooks</h1>
+        <p class="main-subtitle" id="mainSubtitle">Scroll-stopping hooks across 6 categories</p>
+      </div>
+      <span class="demo-watermark">🔒 Free Demo — Limited Access</span>
+    </div>
+
+    <!-- Section info banner (shows description for current section) -->
+    <div id="sectionInfoBanner" style="display:none;background:linear-gradient(135deg,rgba(254,44,85,0.06),rgba(37,244,238,0.04));border:1px solid rgba(37,244,238,0.2);border-radius:12px;padding:16px 20px;margin-bottom:20px;align-items:flex-start;gap:14px;">
+      <div style="font-size:22px;flex-shrink:0;" id="sectionInfoIcon">💡</div>
+      <div style="flex:1;font-size:13.5px;color:#d4d4d8;line-height:1.6;" id="sectionInfoContent">
+        <!-- Filled by JS -->
+      </div>
+      <button onclick="document.getElementById('sectionInfoBanner').style.display='none';" style="background:#27272a;border:1px solid #3f3f46;color:#a1a1aa;width:28px;height:28px;border-radius:6px;cursor:pointer;flex-shrink:0;font-size:14px;display:grid;place-items:center;">✕</button>
+    </div>
+
+    <div class="stat-bar" id="statBar"></div>
+    <!-- Progress bar showing demo vs full content (clickable → Gumroad) -->
+    <a href="https://shakweer3.gumroad.com/l/TikTok-Creator-Kit" target="_blank" rel="noopener" id="demoProgressLink" style="text-decoration:none;display:block;margin-bottom:16px;">
+      <div id="demoProgress" style="display:none;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:11px;color:#71717a;">
+          <span>📊 Demo progress <span style="color:#FE2C55;">→ click to unlock full kit</span></span>
+          <span id="progressLabel">10%</span>
+        </div>
+        <div style="background:#18181b;border:1px solid #27272a;border-radius:999px;height:8px;overflow:hidden;">
+          <div id="progressFill" style="background:linear-gradient(90deg,#FE2C55,#ff406b);height:100%;border-radius:999px;transition:width .5s ease;width:10%;"></div>
+        </div>
+      </div>
+    </a>
+
+    <div class="search-bar">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search hooks, prompts, scripts...">
+    </div>
+
+
+    <div class="filters" id="filters"></div>
+
+    <div class="content-grid" id="contentGrid"></div>
+  </main>
+</div>
+
+<!-- ============ TIMED UPGRADE MODAL ============ -->
+<div id="upgradeModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);z-index:300;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;">
+  <div style="background:linear-gradient(180deg,#18181b,#0a0a0b);border:1px solid rgba(254,44,85,0.3);border-radius:20px;padding:32px;max-width:480px;width:100%;position:relative;box-shadow:0 20px 60px rgba(254,44,85,0.2);margin:20px auto;">
+    <button onclick="closeUpgradeModal()" style="position:absolute;top:14px;right:14px;background:#27272a;border:1px solid #3f3f46;color:#a1a1aa;width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:16px;display:grid;place-items:center;">✕</button>
+    <div style="text-align:center;margin-bottom:20px;">
+      <div style="font-size:48px;margin-bottom:12px;">🔓</div>
+      <h2 style="color:#fff;font-size:24px;font-weight:800;margin-bottom:8px;letter-spacing:-0.02em;">Enjoying the demo?</h2>
+      <p style="color:#a1a1aa;font-size:14px;">Get the Full Kit and unlock everything you need to go viral on TikTok.</p>
+    </div>
+    <div style="background:#0a0a0b;border:1px solid #27272a;border-radius:12px;padding:16px;margin-bottom:20px;">
+      <div style="padding:8px 0 14px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <span style="font-size:15px;line-height:1;">😕</span>
+          <span style="color:#71717a;font-size:12.5px;flex:1;">Demo resources</span>
+          <span style="color:#a1a1aa;font-weight:600;font-size:13px;">127</span>
+        </div>
+        <div style="height:6px;background:#27272a;border-radius:999px;overflow:hidden;margin-bottom:14px;">
+          <div style="height:100%;width:8%;background:#52525b;border-radius:999px;"></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <span style="font-size:15px;line-height:1;">🤩</span>
+          <span style="color:#25F4EE;font-size:12.5px;font-weight:600;flex:1;">Full Kit resources (2026)</span>
+          <span style="color:#fff;font-weight:800;font-size:13px;">1,653</span>
+        </div>
+        <div style="height:6px;background:#27272a;border-radius:999px;overflow:hidden;">
+          <div style="height:100%;width:100%;background:linear-gradient(90deg,#FE2C55,#25F4EE);border-radius:999px;"></div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;border-top:1px solid #27272a;">
+        <span style="color:#71717a;">Random Generator</span>
+        <span style="color:#22c55e;">✓ Included</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;border-top:1px solid #27272a;">
+        <span style="color:#71717a;">Favorites System</span>
+        <span style="color:#22c55e;">✓ Included</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;border-top:1px solid #27272a;">
+        <span style="color:#71717a;">Lifetime Updates</span>
+        <span style="color:#22c55e;">✓ Free</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;border-top:1px solid #27272a;">
+        <span style="color:#71717a;">Regular price</span>
+        <span style="color:#a1a1aa;text-decoration:line-through;">$24.00</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;border-top:1px solid #27272a;">
+        <span style="color:#FE2C55;font-weight:700;">🔥 Launch price</span>
+        <span style="color:#FE2C55;font-weight:800;">$18.00</span>
+      </div>
+    </div>
+    <div style="background:rgba(254,44,85,0.1); border:1px solid rgba(254,44,85,0.3); border-radius:8px; padding:10px; margin-bottom:16px; text-align:center; font-size:12px; color:#FE2C55; font-weight:600;">⏰ Launch price: 25% off — limited-time offer</div>
+    <a href="https://shakweer3.gumroad.com/l/TikTok-Creator-Kit" id="modalCta" style="display:block;text-align:center;background:linear-gradient(135deg,#FE2C55,#ff406b);color:#fff;padding:14px;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none;box-shadow:0 4px 14px rgba(254,44,85,0.3);margin-bottom:10px;">🔥 Get Launch Price — $18.00 →</a>
+    <button onclick="closeUpgradeModal()" style="display:block;width:100%;background:transparent;border:none;color:#71717a;font-size:13px;cursor:pointer;padding:8px;">Maybe later</button>
+  </div>
+</div>
+
+<!-- ============ LOCKED SECTION MODAL ============ -->
+<div id="lockedModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);z-index:300;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;">
+  <div style="background:linear-gradient(180deg,#18181b,#0a0a0b);border:1px solid rgba(254,44,85,0.4);border-radius:20px;padding:32px;max-width:440px;width:100%;position:relative;box-shadow:0 20px 60px rgba(254,44,85,0.3);text-align:center;margin:20px auto;">
+    <button onclick="closeLockedModal()" style="position:absolute;top:14px;right:14px;background:#27272a;border:1px solid #3f3f46;color:#a1a1aa;width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:16px;">✕</button>
+    <div style="width:64px;height:64px;margin:0 auto 16px;border-radius:16px;background:linear-gradient(135deg, rgba(254,44,85,0.18), rgba(37,244,238,0.12));display:flex;align-items:center;justify-content:center;color:#FE2C55;" id="lockedModalIcon"></div>
+    <div style="display:inline-block;background:rgba(254,44,85,0.15);color:#FE2C55;font-size:11px;font-weight:700;letter-spacing:0.08em;padding:4px 12px;border-radius:999px;margin-bottom:14px;">🔒 PRO FEATURE</div>
+    <h2 style="color:#fff;font-size:22px;font-weight:800;margin-bottom:14px;letter-spacing:-0.02em;" id="lockedModalTitle">Algorithm Cheatsheet</h2>
+
+    <!-- Content preview: real description shown clearly, then a blurred "there's more" teaser -->
+    <div style="background:#0a0a0b;border:1px solid #27272a;border-radius:10px;padding:14px 16px;margin-bottom:16px;text-align:left;position:relative;overflow:hidden;">
+      <div style="font-size:10px;font-weight:700;letter-spacing:0.08em;color:#52525b;margin-bottom:8px;">PREVIEW</div>
+      <div style="font-size:13px;color:#d4d4d8;line-height:1.6;" id="lockedModalPreviewText">Description here.</div>
+      <div aria-hidden="true" style="margin-top:10px;filter:blur(4px);opacity:0.55;user-select:none;pointer-events:none;">
+        <div style="height:10px;background:#3f3f46;border-radius:4px;margin-bottom:7px;width:92%;"></div>
+        <div style="height:10px;background:#3f3f46;border-radius:4px;margin-bottom:7px;width:78%;"></div>
+        <div style="height:10px;background:#3f3f46;border-radius:4px;width:85%;"></div>
+      </div>
+      <div style="position:absolute;left:0;right:0;bottom:0;height:56px;background:linear-gradient(180deg,rgba(10,10,11,0),#0a0a0b 75%);display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;">
+        <span style="font-size:11px;font-weight:700;color:#FE2C55;">🔒 Unlock to see the full breakdown</span>
+      </div>
+    </div>
+    <div style="background:#0a0a0b;border:1px solid #27272a;border-radius:10px;padding:14px;margin-bottom:16px;text-align:left;">
+      <div style="font-size:12px;color:#71717a;margin-bottom:8px;font-weight:600;">✨ AVAILABLE IN FULL KIT:</div>
+      <div style="font-size:13px;color:#25F4EE;line-height:1.7;">
+        ✓ All 5 Bonus Resources<br>
+        ✓ 1,653 total resources (2026 Edition)<br>
+        ✓ Random Generator<br>
+        ✓ Favorites System<br>
+        ✓ Lifetime updates
+      </div>
+    </div>
+    <div style="background:rgba(254,44,85,0.1);border:1px solid rgba(254,44,85,0.3);border-radius:8px;padding:10px;margin-bottom:10px;text-align:center;font-size:12px;color:#FE2C55;font-weight:600;">🔥 Launch price: 25% off — $18.00 instead of $24</div>
+    <a href="https://shakweer3.gumroad.com/l/TikTok-Creator-Kit" style="display:block;text-align:center;background:linear-gradient(135deg,#FE2C55,#ff406b);color:#fff;padding:14px;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none;box-shadow:0 4px 14px rgba(254,44,85,0.3);margin-bottom:10px;">🔥 Unlock All Bonuses — $18.00 →</a>
+    <button onclick="closeLockedModal()" style="display:block;width:100%;background:transparent;border:none;color:#71717a;font-size:13px;cursor:pointer;padding:8px;">Maybe later</button>
+  </div>
+</div>
+
+<style>
+#upgradeModal.show { display: flex !important; }
+#lockedModal.show { display: flex !important; }
+.locked-item { position: relative; opacity: 0.85; }
+.locked-item:hover { opacity: 1; background: rgba(254,44,85,0.08); color: #fff; }
+.locked-item .count { background: rgba(254,44,85,0.15); color: #FE2C55; }
+</style>
+
+<script>
+// ============ DATA ============
+const DATA = {
+  "hooks": {
+    "curiosity": [
+      "The 3rd tip will change how you make TikToks forever...",
+      "I tried this trend for 7 days and the results shocked me...",
+      "Nobody talks about this TikTok feature but it's a game-changer...",
+      "This hidden hack got me 1M views in 24 hours...",
+      "Wait until you see what happens at the end..."
+    ],
+    "contrarian": [
+      "Stop posting every day. Here's what actually works...",
+      "Quality doesn't matter on TikTok as much as you think...",
+      "The 'consistency myth' is killing your TikTok growth...",
+      "Hooks are overrated. This matters way more...",
+      "Forget trends — do this instead for viral growth..."
+    ],
+    "list": [
+      "3 TikTok hacks that are working right now...",
+      "5 editing tricks that make your videos look pro...",
+      "7 niche ideas that will explode in 2026...",
+      "10 trending sounds you should use this week...",
+      "5 mistakes killing your TikTok growth..."
+    ],
+    "story": [
+      "I went from 0 to 100K followers in 60 days. Here's exactly what I did...",
+      "I quit my 9-5 because of this TikTok strategy...",
+      "After 200 failed TikToks, I finally figured it out...",
+      "I made $10K from one viral TikTok. Here's the breakdown...",
+      "I tried the 'lazy method' for 30 days and this happened..."
+    ],
+    "problem": [
+      "Getting 200 views on every TikTok? Here's the actual problem...",
+      "Posting every day but not growing? This is why...",
+      "Your TikToks stop at 1K views? Here's the real reason...",
+      "Struggling to come up with content ideas? Try this system...",
+      "TikTok shadowban keeping you stuck? Here's the fix..."
+    ],
+    "shocking": [
+      "I made $47K from one 7-second TikTok. Here's the breakdown...",
+      "This sound got 50M views in 48 hours. Here's why...",
+      "Posting at 3AM got me 2M views. Here's the data...",
+      "I deleted my viral TikTok and it changed everything...",
+      "This 1-second edit got me 10K followers overnight..."
+    ]
+  },
+  "prompts": {
+    "idea_generation": [
+      "Act as a viral TikTok content strategist. Generate 10 viral TikTok video ideas for the niche: [NICHE]. Each idea must include: 1) Hook (first 3 seconds), 2) Core concept, 3) Why it will go viral, 4) Estimated best posting time. Format as a numbered list.",
+      "I'm a TikTok creator in the [NICHE] niche. Generate 15 content ideas inspired by current trends but with a unique twist that makes them stand out. For each idea, explain the trend source and the unique angle."
+    ],
+    "script_writing": [
+      "Write a 45-second TikTok script for [NICHE]. The topic is [TOPIC]. Include: 1) A scroll-stopping hook (first 3 seconds), 2) The main value/content, 3) A memorable closing with CTA. Format with timestamps and stage directions.",
+      "Act as a viral TikTok scriptwriter. Write a 60-second educational script for [NICHE] about [TOPIC]. Use the 'hook-value-payoff' structure. Include specific edit cues, text overlays, and B-roll suggestions."
+    ],
+    "hook_creation": [
+      "Act as a viral TikTok hook writer. Generate 10 curiosity-driven hooks for a video about [TOPIC] in the [NICHE] niche. Each hook should make viewers NEED to watch until the end. Avoid clichés.",
+      "I need 10 contrarian hooks for TikTok in the [NICHE] niche about [TOPIC]. Each hook should challenge conventional wisdom in a way that's defensible but stops the scroll."
+    ],
+    "caption_writing": [
+      "Write a TikTok caption for a [CONTENT TYPE] video about [TOPIC] in [NICHE]. The caption should: 1) Reinforce the hook, 2) Add context not in the video, 3) End with a question to drive comments, 4) Include 5-7 relevant hashtags.",
+      "Act as a TikTok caption writer. Create 3 caption variations for a video about [TOPIC] in [NICHE]. Make one short (under 50 chars), one medium (50-150 chars), and one long (150-300 chars). Include hashtags for each."
+    ],
+    "hashtag_research": [
+      "Act as a TikTok hashtag strategist. Research and suggest 15 hashtags for a video about [TOPIC] in the [NICHE] niche. Mix: 3 broad (1M+ posts), 5 medium (100K-1M posts), and 7 niche (10K-100K posts). Explain why each.",
+      "I need a hashtag strategy for a [NICHE] TikTok account. Suggest: 1) 5 evergreen hashtags to use on every video, 2) 10 trending hashtags this week, 3) 5 niche-specific hashtags. Explain the mix."
+    ],
+    "trend_analysis": [
+      "Act as a TikTok trend analyst. Identify 5 current trends in the [NICHE] niche and explain: 1) The trend origin, 2) Why it's working, 3) How to adapt it without copying, 4) How much longer it will likely last.",
+      "Analyze the top 10 viral TikToks in [NICHE] from the past 7 days. Identify patterns in: hooks, video length, editing style, sounds, and posting times. Summarize the actionable insights."
+    ],
+    "bio_optimization": [
+      "Act as a TikTok bio copywriter. Write 3 bio variations for a [NICHE] creator. Each should be under 80 characters, include a clear value proposition, and end with a CTA. Explain the strategy behind each.",
+      "I need a TikTok bio for a [NICHE] account that converts visitors to followers. Include: 1) A hook line, 2) Authority/credibility, 3) What to expect, 4) CTA. Keep it under 80 characters."
+    ],
+    "cta_creation": [
+      "Act as a TikTok CTA specialist. Generate 10 CTAs for a [CONTENT TYPE] video about [TOPIC] in [NICHE]. Each CTA should drive a specific action: follow, comment, save, share, or click link. Vary the approaches.",
+      "I need 5 'follow for more' CTAs for TikTok in [NICHE]. Each should feel natural, not salesy. Vary the structure: question, promise, curiosity, social proof, direct."
+    ],
+    "storytelling": [
+      "Act as a TikTok storyteller. Write a 60-second personal story about [TOPIC] in [NICHE]. Use the 'in media res' opening — start in the middle of the action. Build tension, then resolve. Include stage directions.",
+      "I need a 45-second 'story time' script for TikTok about a failure in [NICHE]. Structure: 1) The setup, 2) The mistake, 3) The consequence, 4) The lesson. Make it relatable and vulnerable."
+    ]
+  },
+  "scripts": [
+    {
+      "id": 1,
+      "type": "Educational",
+      "duration": "30-60s",
+      "title": "The 3-Step Tutorial",
+      "template": "HOOK (3s): 'Nobody talks about this, but [TOPIC] is easier than you think. Here's the 3-step method I use.'\n\nSTEP 1 (10s): 'First, [ACTION 1]. This matters because [REASON]. Watch how I do it: [DEMO].'\n\nSTEP 2 (10s): 'Next, [ACTION 2]. Most people skip this and that's why they fail. [DEMO].'\n\nSTEP 3 (10s): 'Finally, [ACTION 3]. This is the secret sauce. [DEMO].'\n\nCTA (5s): 'Save this and follow for more [NICHE] tips.'"
+    },
+    {
+      "id": 2,
+      "type": "Educational",
+      "duration": "45-60s",
+      "title": "Myth-Buster",
+      "template": "HOOK (3s): 'Everything you've been told about [TOPIC] is wrong.'\n\nMYTH (10s): 'They say [COMMON MYTH]. Sounds right, doesn't it?'\n\nREALITY (15s): 'But here's the truth: [REALITY]. I learned this the hard way when [PERSONAL STORY].'\n\nEVIDENCE (10s): 'Look at this: [EVIDENCE/EXAMPLE]. See the difference?'\n\nCTA (5s): 'Follow for more [TOPIC] truths they don't tell you.'"
+    },
+    {
+      "id": 3,
+      "type": "Educational",
+      "duration": "30-45s",
+      "title": "Comparison",
+      "template": "HOOK (3s): '[OPTION A] vs [OPTION B]. I tested both for [TIME]. Here's the winner.'\n\nOPTION A (10s): '[OPTION A]: [PRO 1], [PRO 2]. But [CON].'\n\nOPTION B (10s): '[OPTION B]: [PRO 1], [PRO 2]. But [CON].'\n\nVERDICT (10s): 'For [SPECIFIC SITUATION], go with [WINNER]. For [OTHER SITUATION], choose [OTHER].'\n\nCTA (5s): 'Save this so you remember. Which would you pick?'"
+    },
+    {
+      "id": 4,
+      "type": "Educational",
+      "duration": "30-45s",
+      "title": "Listicle",
+      "template": "HOOK (3s): '5 [ITEMS] that changed my [OUTCOME]. #3 is the most underrated.'\n\nITEM 1 (5s): 'Number 1: [ITEM]. [WHY IT MATTERS].'\n\nITEM 2 (5s): 'Number 2: [ITEM]. [WHY IT MATTERS].'\n\nITEM 3 (5s): 'Number 3: [ITEM]. I never see anyone talking about this. [WHY IT MATTERS].'\n\nITEM 4 (5s): 'Number 4: [ITEM]. [WHY IT MATTERS].'\n\nITEM 5 (5s): 'Number 5: [ITEM]. [WHY IT MATTERS].'\n\nCTA (5s): 'Comment your favorite. Follow for more.'"
+    },
+    {
+      "id": 5,
+      "type": "Educational",
+      "duration": "60s",
+      "title": "Problem-Solution",
+      "template": "HOOK (3s): 'Struggling with [PROBLEM]? I was too. Here's what fixed it.'\n\nPROBLEM (10s): '[DESCRIBE PAIN]. You've tried [ATTEMPT 1], [ATTEMPT 2]. Nothing works.'\n\nSOLUTION (15s): 'Then I found [SOLUTION]. Here's how it works: [EXPLANATION].'\n\nRESULTS (10s): 'In [TIMEFRAME], I went from [BEFORE] to [AFTER].'\n\nCTA (5s): 'Try it and follow for more [NICHE] solutions.'"
+    }
+  ],
+  "hashtags": {
+    "business": [
+      "#entrepreneur",
+      "#smallbusiness",
+      "#businesstips"
+    ],
+    "fitness": [
+      "#fitness",
+      "#workout",
+      "#gym"
+    ],
+    "food": [
+      "#food",
+      "#foodie",
+      "#recipe"
+    ],
+    "fashion": [
+      "#fashion",
+      "#ootd",
+      "#style"
+    ],
+    "education": [
+      "#learnontiktok",
+      "#education",
+      "#edutok"
+    ],
+    "tech": [
+      "#tech",
+      "#technology",
+      "#techtok"
+    ],
+    "travel": [
+      "#travel",
+      "#traveling",
+      "#wanderlust"
+    ],
+    "finance": [
+      "#personalfinance",
+      "#money",
+      "#investing"
+    ],
+    "lifestyle": [
+      "#lifestyle",
+      "#dailylife",
+      "#dailyroutine"
+    ],
+    "motivation": [
+      "#motivation",
+      "#motivational",
+      "#mindset"
+    ]
+  },
+  "ideas": {
+    "trend_jacking": [
+      "Use a trending sound to share [NICHE]-specific insight",
+      "Stitch a viral video and add your unique [NICHE] perspective",
+      "Duet a trending challenge with your [NICHE] twist",
+      "Adapt a trending format to your specific [NICHE] topic"
+    ],
+    "educational": [
+      "Teach a [NICHE] skill in 60 seconds",
+      "Explain a [NICHE] concept using a simple analogy",
+      "Share a [NICHE] hack most beginners don't know",
+      "Compare two [NICHE] tools/methods head-to-head"
+    ],
+    "behind_the_scenes": [
+      "Show your workspace/setup for [NICHE] work",
+      "Film a real (unedited) work session in [NICHE]",
+      "Show the bloopers from a recent [NICHE] project",
+      "Behind the scenes of creating a [NICHE] product"
+    ],
+    "storytelling": [
+      "Tell the story of how you got into [NICHE]",
+      "Share your biggest failure in [NICHE] and the lesson",
+      "Tell a story about a [NICHE] mentor who changed you",
+      "Share a 'lucky break' moment in your [NICHE] journey"
+    ],
+    "listicle": [
+      "5 [NICHE] tools I can't live without",
+      "10 [NICHE] terms beginners should know",
+      "3 [NICHE] habits that changed my life",
+      "7 [NICHE] mistakes beginners always make"
+    ],
+    "controversial": [
+      "[NICHE] is overrated. Here's what's actually better",
+      "Stop doing [COMMON PRACTICE] in [NICHE]. It's wrong",
+      "The [NICHE] industry is broken. Here's the truth",
+      "Most [NICHE] advice is generic garbage"
+    ]
+  },
+  "formulas": [
+    {
+      "id": 1,
+      "type": "Number-based",
+      "formula": "[NUMBER] [NICHE] Secrets Nobody Told You About",
+      "example": "5 TikTok Secrets Nobody Told You About"
+    },
+    {
+      "id": 2,
+      "type": "Number-based",
+      "formula": "[NUMBER] Things I Wish I Knew Before [ACTIVITY]",
+      "example": "7 Things I Wish I Knew Before Going Viral"
+    },
+    {
+      "id": 3,
+      "type": "Number-based",
+      "formula": "[NUMBER] [NICHE] Mistakes That Are Killing Your [GOAL]",
+      "example": "5 TikTok Mistakes That Are Killing Your Growth"
+    },
+    {
+      "id": 4,
+      "type": "Number-based",
+      "formula": "Top [NUMBER] [ITEMS] for [USE CASE] in 2026",
+      "example": "Top 5 Editing Apps for TikTok in 2026"
+    },
+    {
+      "id": 5,
+      "type": "Number-based",
+      "formula": "[NUMBER] Free [ITEMS] Better Than Paid Alternatives",
+      "example": "7 Free Editing Tools Better Than Paid Ones"
+    },
+    {
+      "id": 6,
+      "type": "Number-based",
+      "formula": "[NUMBER] [NICHE] Hacks That Save [TIME/MONEY]",
+      "example": "3 TikTok Hacks That Save Hours Daily"
+    },
+    {
+      "id": 7,
+      "type": "Number-based",
+      "formula": "[NUMBER] [NICHE] Terms Beginners Need to Know",
+      "example": "10 TikTok Terms Beginners Need to Know"
+    },
+    {
+      "id": 8,
+      "type": "Number-based",
+      "formula": "[NUMBER] Habits of Successful [ROLE]s",
+      "example": "5 Habits of Successful TikTok Creators"
+    }
+  ],
+  "bios": [
+    {
+      "id": 1,
+      "type": "Business",
+      "template": "[ROLE] @ [COMPANY] | Helping [AUDIENCE] achieve [OUTCOME] | [CREDIBILITY MARKER] | Free [RESOURCE]: [LINK]"
+    },
+    {
+      "id": 2,
+      "type": "Business",
+      "template": "Founder of [BRAND] | [OUTCOME] for [AUDIENCE] | Featured in [PUBLICATION] | Work with us: [LINK]"
+    },
+    {
+      "id": 3,
+      "type": "Business",
+      "template": "[TITLE] & [TITLE] | Building [THING] | [NUMBER]+ [METRIC] | Free [RESOURCE] in bio"
+    }
+  ],
+  "ctas": [
+    "Follow for more [NICHE] tips",
+    "Save this for later",
+    "Comment '[WORD]' and I'll DM you the link"
+  ],
+  "captions": [
+    {
+      "id": 1,
+      "type": "Educational",
+      "template": "Most people get [TOPIC] wrong. Here's the right way. Save this and follow for more [NICHE] tips. #niche #tip"
+    },
+    {
+      "id": 2,
+      "type": "Educational",
+      "template": "[NUMBER] [ITEMS] that actually work. Comment which one you're trying first. #niche #learn"
+    },
+    {
+      "id": 3,
+      "type": "Educational",
+      "template": "Stop doing [COMMON MISTAKE]. Do this instead. Save for later. #niche #growth"
+    },
+    {
+      "id": 4,
+      "type": "Educational",
+      "template": "If you're a [AUDIENCE], you need to know this. Follow for more. #niche #beginner"
+    },
+    {
+      "id": 5,
+      "type": "Educational",
+      "template": "The truth about [TOPIC] they don't tell you. Comment your thoughts. #niche #truth"
+    },
+    {
+      "id": 6,
+      "type": "Educational",
+      "template": "[NUMBER]-step method to [ACHIEVE OUTCOME]. Save this. #niche #tutorial"
+    }
+  ],
+  "ai_tool_guide": [
+    {
+      "category": "Idea Generation",
+      "best_tools": [
+        "ChatGPT (GPT-4)",
+        "Claude 3.5",
+        "Gemini"
+      ],
+      "why": "Creative ideation works best with strong reasoning models. ChatGPT and Claude excel at generating diverse, actionable ideas.",
+      "free_alternative": "Gemini (free) or Microsoft Copilot (free, GPT-4 powered)",
+      "tip": "Ask for 10+ ideas at once, then ask the AI to rank them by viral potential."
+    },
+    {
+      "category": "Script Writing",
+      "best_tools": [
+        "Claude 3.5",
+        "ChatGPT (GPT-4)"
+      ],
+      "why": "Claude is the strongest for storytelling and natural dialogue. ChatGPT is great for structured scripts with clear beats.",
+      "free_alternative": "Claude free tier (limited daily) or Gemini for shorter scripts",
+      "tip": "Always ask for \"conversational tone\" and \"TikTok-style\" to avoid robotic output."
+    },
+    {
+      "category": "Hook Creation",
+      "best_tools": [
+        "ChatGPT (GPT-4)",
+        "Claude 3.5",
+        "DeepSeek"
+      ],
+      "why": "Hooks need punchy, creative writing. All three top-tier models handle this well, but ChatGPT tends to be most concise.",
+      "free_alternative": "DeepSeek (free) or Gemini (free)",
+      "tip": "Generate 20+ hooks, then manually pick the top 3. Quantity beats quality here."
+    }
+  ]
+};
+
+// Section meta
+const SECTIONS = {
+  hooks: {
+    title: 'Hooks',
+    subtitle: 'Scroll-stopping hooks across 6 categories',
+    tagLabel: 'Category',
+    description: '<strong>What is a hook?</strong> The first 3 seconds of your TikTok — the make-or-break moment when viewers decide to keep watching or scroll past. A great hook can 10x your completion rate, which is the #1 signal TikTok\'s algorithm uses to push your video.<br><br><strong>How to use:</strong> Pick a hook that fits your video\'s vibe, tweak the wording to match your niche, and use it as your opening line. Test different hook categories to see what resonates with your audience.'
+  },
+  prompts: {
+    title: 'AI Prompts',
+    subtitle: 'Universal text prompts — works with any AI chatbot (ChatGPT, Claude, Gemini, DeepSeek, Copilot, Grok & more). Not for image/video AI like Midjourney or DALL-E.',
+    tagLabel: 'Use Case',
+    description: '<strong>What is an AI prompt?</strong> A specific instruction you give to an AI chatbot to generate the content you need — ideas, scripts, captions, hooks, or strategies. Better prompts = better results. These are pre-engineered prompts that save you hours of trial and error.<br><br><strong>How to use:</strong> Click Copy, paste into ChatGPT/Claude/Gemini, replace the [BRACKETS] with your details (niche, topic, audience), and the AI will generate customized content for you.<br><br><span style="color:#facc15;">⚠ Text-only AI chatbots — not for Midjourney, DALL-E, or other image/video generators.</span>'
+  },
+  scripts: {
+    title: 'Script Templates',
+    subtitle: 'Fill-in-the-blank video scripts',
+    tagLabel: 'Type',
+    description: '<strong>What is a script template?</strong> A pre-structured video script with placeholders [LIKE THIS] that you fill in with your content. Each template includes a hook, body, and call-to-action — the proven structure of viral TikToks.<br><br><strong>How to use:</strong> Pick a template that matches your video type, replace the [BRACKETS] with your specific content, and you have a ready-to-shoot script in under 2 minutes.'
+  },
+  ideas: {
+    title: 'Content Ideas',
+    subtitle: 'Beat creator\'s block instantly',
+    tagLabel: 'Category',
+    description: '<strong>What is this?</strong> Proven content ideas across 6 categories — from trend-jacking to storytelling to controversial takes. Use these when you\'re stuck and need inspiration fast.<br><br><strong>How to use:</strong> Browse by category, or upgrade to the Full Kit for the 🎲 Random Generator that gives you instant inspiration with one click.'
+  },
+  hashtags: {
+    title: 'Hashtag Database',
+    subtitle: 'Niche-organized hashtags',
+    tagLabel: 'Niche',
+    description: '<strong>What are hashtags?</strong> Tags that help TikTok categorize and distribute your content to the right audience. The right mix can significantly boost your reach — but using too many or irrelevant ones can hurt you.<br><br><strong>How to use:</strong> Pick 3-5 niche-specific hashtags + 1-2 broader ones. Use the Copy button to grab a whole set at once. <span style="color:#facc15;">⚠ Always verify hashtags are still active on TikTok before using — trends shift fast.</span>'
+  },
+  formulas: {
+    title: 'Title Formulas',
+    subtitle: 'Proven viral title structures',
+    tagLabel: 'Type',
+    description: '<strong>What is a title formula?</strong> A proven sentence structure that grabs attention and drives clicks. These formulas are reverse-engineered from thousands of viral TikToks across every niche.<br><br><strong>How to use:</strong> Pick a formula type (number-based, how-to, question, etc.), fill in your niche/topic/numbers, and you have a scroll-stopping title instantly. Use as your on-screen text or video caption.'
+  },
+  bios: {
+    title: 'Bio Templates',
+    subtitle: 'Profile bio templates by account type',
+    tagLabel: 'Type',
+    description: '<strong>What is a bio?</strong> The 80-character description under your username. It\'s your first impression — visitors decide in 2 seconds whether to follow based on your bio. A clear, compelling bio converts profile visits into followers.<br><br><strong>How to use:</strong> Pick a template that matches your account type, fill in the [BRACKETS], and paste into your TikTok bio. Keep it under 80 characters to avoid truncation.'
+  },
+  captions: {
+    title: 'Caption Templates',
+    subtitle: 'Ready-to-use caption formulas',
+    tagLabel: 'Type',
+    description: '<strong>What is a caption?</strong> The text that accompanies your TikTok video. Captions boost engagement, help the algorithm understand your content, and give context the video can\'t. A good caption can double your engagement rate.<br><br><strong>How to use:</strong> Pick a template, replace [BRACKETS] with your details, and add 3-5 relevant hashtags. Always end with a CTA (see CTA Library) to drive engagement.'
+  },
+  ctas: {
+    title: 'CTA Library',
+    subtitle: 'High-converting call-to-actions',
+    tagLabel: 'Action',
+    description: '<strong>What is a CTA?</strong> Call-To-Action — the line that tells viewers what to do next (follow, comment, save, share, click). Videos without CTAs leave engagement on the table. The right CTA can 3x your follow rate.<br><br><strong>How to use:</strong> Pick a CTA that matches your goal (follows, comments, saves, etc.), place it at the end of your video AND in your caption. Test different CTAs to see what converts best for your audience.'
+  },
+  ai_tool_guide: {
+    title: 'AI Tool Guide',
+    subtitle: 'Best AI tool for each prompt type — preview (3 of 9 in full kit)',
+    tagLabel: 'Guide',
+    description: '<strong>What is this?</strong> Not all AI tools are equal for every task. This guide shows you the best AI chatbot for each type of prompt — so you get the best results without wasting time on the wrong tool.<br><br><strong>How to use:</strong> Find your prompt category, check the recommended tools, and use the free alternative if you don\'t have a paid subscription. Apply the Pro Tip for best results. <span style="color:#25F4EE;">(Preview — full kit has all 9 categories)</span>'
+  }
+};
+
+let currentSection = 'hooks';
+let currentFilter = 'all';
+let searchTerm = '';
+
+// ============ RENDER ============
+function render() {
+  const meta = SECTIONS[currentSection];
+  document.getElementById('mainTitle').textContent = meta.title;
+  document.getElementById('mainSubtitle').textContent = meta.subtitle;
+
+  // Render filters
+  renderFilters();
+
+  // Render content
+  renderContent();
+
+  // Update stat bar
+  updateStatBar();
+}
+
+function renderFilters() {
+  const filtersEl = document.getElementById('filters');
+  if (currentSection === 'ai_tool_guide') {
+    filtersEl.innerHTML = '';
+    return;
+  }
+  const data = DATA[currentSection];
+
+  if (Array.isArray(data)) {
+    // For arrays (scripts, formulas, bios, captions, ctas) - filter by type
+    const types = [...new Set(data.map(item => item.type || item.category || 'All'))];
+    if (types.length <= 1) {
+      filtersEl.innerHTML = '';
+      return;
+    }
+    let html = `<button class="filter-chip ${currentFilter === 'all' ? 'active' : ''}" onclick="setFilter('all')">All</button>`;
+    types.forEach(t => {
+      html += `<button class="filter-chip ${currentFilter === t ? 'active' : ''}" onclick="setFilter('${t}')">${t}</button>`;
+    });
+    filtersEl.innerHTML = html;
+  } else {
+    // For objects (hooks, prompts, ideas, hashtags) - filter by key
+    const keys = Object.keys(data);
+    let html = `<button class="filter-chip ${currentFilter === 'all' ? 'active' : ''}" onclick="setFilter('all')">All</button>`;
+    keys.forEach(k => {
+      const label = k.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+      html += `<button class="filter-chip ${currentFilter === k ? 'active' : ''}" onclick="setFilter('${k}')">${label}</button>`;
+    });
+    filtersEl.innerHTML = html;
+  }
+}
+
+function renderContent() {
+  const grid = document.getElementById('contentGrid');
+  const data = DATA[currentSection];
+  let items = [];
+
+  // Special rendering for AI Tool Guide
+  if (currentSection === 'ai_tool_guide') {
+    const guide = DATA.ai_tool_guide || [];
+    let filtered = guide;
+    if (searchTerm) {
+      filtered = guide.filter(g => (g.category + ' ' + g.why + ' ' + g.tip).toLowerCase().includes(searchTerm.toLowerCase()));
+    }
+    if (filtered.length === 0) {
+      grid.innerHTML = `
+        <div class="empty-state">
+          <div class="icon">🔍</div>
+          <h3>No results found</h3>
+          <p>Try a different search term.</p>
+        </div>`;
+      return;
+    }
+    grid.innerHTML = filtered.map((g, i) => {
+      const tagClass = getCategoryColor(g.category);
+      return `
+        <div class="content-item guide-card">
+          <div class="item-header">
+            <div style="flex:1;">
+              <div class="item-meta">
+                <span class="tag ${tagClass}">${escapeHtml(g.category)}</span>
+              </div>
+              <div style="margin-top:8px;">
+                <div style="font-size:13px;color:#a1a1aa;margin-bottom:6px;">🏆 <strong style="color:#fff;">Best Tools:</strong></div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">
+                  ${g.best_tools.map(t => `<span style="background:linear-gradient(135deg,rgba(254,44,85,0.15),rgba(37,244,238,0.1));border:1px solid rgba(254,44,85,0.3);color:#fff;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:600;">${escapeHtml(t)}</span>`).join('')}
+                </div>
+                <div style="font-size:13px;color:#a1a1aa;margin-bottom:6px;">💡 <strong style="color:#fff;">Why:</strong></div>
+                <div style="font-size:13px;color:#e4e4e7;margin-bottom:12px;line-height:1.5;">${escapeHtml(g.why)}</div>
+                <div style="font-size:13px;color:#a1a1aa;margin-bottom:6px;">🆓 <strong style="color:#fff;">Free Alternative:</strong></div>
+                <div style="font-size:13px;color:#25F4EE;margin-bottom:12px;">${escapeHtml(g.free_alternative)}</div>
+                <div style="font-size:13px;color:#a1a1aa;margin-bottom:6px;">⚡ <strong style="color:#fff;">Pro Tip:</strong></div>
+                <div style="font-size:13px;color:#e4e4e7;font-style:italic;background:#0a0a0b;padding:10px;border-radius:8px;border-left:3px solid #FE2C55;">${escapeHtml(g.tip)}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+    return;
+  }
+
+  if (Array.isArray(data)) {
+    data.forEach((item, idx) => {
+      const itemType = typeof item === 'string' ? 'All' : (item.type || item.category || 'All');
+      if (currentFilter !== 'all' && itemType !== currentFilter) return;
+      if (typeof item === 'string') {
+        items.push({ text: item, category: 'All', _idx: idx });
+      } else {
+        items.push({ ...item, _idx: idx });
+      }
+    });
+  } else {
+    Object.entries(data).forEach(([key, arr]) => {
+      if (currentFilter !== 'all' && key !== currentFilter) return;
+      arr.forEach((item, idx) => {
+        if (typeof item === 'string') {
+          items.push({ text: item, category: key, _idx: idx });
+        } else {
+          items.push({ ...item, category: key, _idx: idx });
+        }
+      });
+    });
+  }
+
+  // Filter by search
+  if (searchTerm) {
+    items = items.filter(item => {
+      const text = item.text || item.template || item.formula || item.example || '';
+      return text.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+  }
+
+  if (items.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <div class="icon">🔍</div>
+        <h3>No results found</h3>
+        <p>Try a different search term or filter.</p>
+      </div>`;
+    return;
+  }
+
+  const tagColors = ['pink', 'cyan', 'gold', 'green', 'purple', 'pink'];
+
+  grid.innerHTML = items.map((item, i) => {
+    const text = item.text || item.template || item.formula || '';
+    const example = item.example ? `<div style="margin-top:6px;font-size:12px;color:#71717a;font-style:italic;">Example: ${item.example}</div>` : '';
+    const meta = SECTIONS[currentSection].tagLabel;
+    const category = item.category || item.type || '';
+    const tagClass = getCategoryColor(category);
+    const isLong = text.length > 100 || text.includes('\n');
+    const isPrompt = currentSection === 'prompts';
+    const universalBadge = isPrompt ? `<span class="tag" style="background:linear-gradient(135deg,rgba(254,44,85,0.15),rgba(37,244,238,0.1));color:#fff;border:1px solid rgba(37,244,238,0.3);">⚡ Universal AI</span>` : '';
+
+    return `
+      <div class="content-item">
+        <div class="item-header">
+          <div style="flex:1;">
+            <div class="item-meta">
+              ${universalBadge}
+              ${category ? `<span class="tag ${tagClass}">${category}</span>` : ''}
+              ${item.duration ? `<span>⏱ ${item.duration}</span>` : ''}
+              ${item.title ? `<span>📄 ${item.title}</span>` : ''}
+            </div>
+            <div class="item-text">${escapeHtml(text)}${example}</div>
+            ${isPrompt ? `<div style="margin-top:8px;font-size:11px;color:#52525b;display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="color:#25F4EE;">✓</span> <strong style="color:#a1a1aa;">Works with:</strong> ChatGPT, Claude, Gemini, DeepSeek, Copilot, Grok &amp; any <strong style="color:#a1a1aa;">text-based AI chatbot</strong> <span style="color:#71717a;">(not for image AI like Midjourney/DALL-E)</span></div>` : ''}
+            ${isLong ? '' : ''}
+          </div>
+          <button class="copy-btn" onclick="copyItem(this, ${JSON.stringify(text).replace(/"/g, '&quot;')})">
+            Copy
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Append bottom upgrade CTA after the grid (only if not in AI tool guide)
+  if (currentSection !== 'ai_tool_guide' && items.length > 0) {
+    grid.innerHTML += `
+      <div style="margin-top:24px;padding:24px;background:linear-gradient(135deg,rgba(254,44,85,0.08),rgba(37,244,238,0.05));border:1px solid rgba(254,44,85,0.25);border-radius:16px;text-align:center;">
+        <div style="font-size:32px;margin-bottom:8px;">🔓</div>
+        <h3 style="color:#fff;font-size:18px;font-weight:700;margin-bottom:8px;">Want more? Get all 1,653 resources</h3>
+        <p style="color:#a1a1aa;font-size:13.5px;margin-bottom:8px;line-height:1.5;">You're seeing only 10% of the full kit. Upgrade to unlock everything, plus the Random Generator and Favorites system.</p>
+        <p style="color:#FE2C55;font-size:13px;font-weight:600;margin-bottom:16px;">🔥 Launch price: <del style="opacity:0.6;">$24</del> <strong>$18.00</strong> — limited-time offer</p>
+        <a href="https://shakweer3.gumroad.com/l/TikTok-Creator-Kit" id="bottomCta" style="display:inline-block;background:linear-gradient(135deg,#FE2C55,#ff406b);color:#fff;padding:12px 28px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;box-shadow:0 4px 14px rgba(254,44,85,0.3);">🔥 Get Launch Price — $18.00 →</a>
+      </div>
+    `;
+  }
+}
+
+// Full version counts for comparison
+const FULL_COUNTS = {
+  hooks: 302,
+  prompts: 150,
+  scripts: 40,
+  ideas: 200,
+  hashtags: 497,
+  formulas: 75,
+  bios: 25,
+  captions: 50,
+  ctas: 30,
+  ai_tool_guide: 9
+};
+
+function updateStatBar() {
+  const data = DATA[currentSection];
+  let total = 0;
+  if (currentSection === 'ai_tool_guide') {
+    total = (DATA.ai_tool_guide || []).length;
+  } else if (Array.isArray(data)) {
+    total = data.length;
+  } else {
+    total = Object.values(data).reduce((s, a) => s + (Array.isArray(a) ? a.length : 0), 0);
+  }
+
+  const fullCount = FULL_COUNTS[currentSection] || 0;
+  const hiddenCount = fullCount - total;
+  const percent = fullCount > 0 ? Math.round((total / fullCount) * 100) : 0;
+
+  // Update progress bar
+  const progressEl = document.getElementById('demoProgress');
+  const progressFill = document.getElementById('progressFill');
+  const progressLabel = document.getElementById('progressLabel');
+  if (progressEl && progressFill && progressLabel) {
+    if (fullCount > 0) {
+      progressEl.style.display = 'block';
+      progressFill.style.width = percent + '%';
+      progressLabel.textContent = percent + '% (showing ' + total + ' of ' + fullCount + ')';
+    } else {
+      progressEl.style.display = 'none';
+    }
+  }
+
+  if (fullCount > 0 && currentSection !== 'ai_tool_guide') {
+    document.getElementById('statBar').innerHTML = `
+      <span class="stat-pill">👀 Showing: <strong style="color:#FE2C55;">${total}</strong> of <strong>${fullCount}</strong> (${percent}% demo)</span>
+      <a href="https://shakweer3.gumroad.com/l/TikTok-Creator-Kit" target="_blank" rel="noopener" style="text-decoration:none;cursor:pointer;"><span class="stat-pill accent" style="display:inline-flex;align-items:center;gap:4px;">🔒 <strong>${hiddenCount}</strong> more in Full Kit →</span></a>
+    `;
+  } else if (currentSection === 'ai_tool_guide') {
+    document.getElementById('statBar').innerHTML = `
+      <span class="stat-pill">👀 Showing: <strong style="color:#FE2C55;">${total}</strong> of <strong>${fullCount}</strong> (${Math.round((total/fullCount)*100)}% demo)</span>
+      <a href="https://shakweer3.gumroad.com/l/TikTok-Creator-Kit" target="_blank" rel="noopener" style="text-decoration:none;cursor:pointer;"><span class="stat-pill accent" style="display:inline-flex;align-items:center;gap:4px;">🔒 <strong>${fullCount - total}</strong> more in Full Kit →</span></a>
+    `;
+  } else {
+    document.getElementById('statBar').innerHTML = `
+      <span class="stat-pill">Showing: <strong>${total}</strong> items</span>
+      <span class="stat-pill accent">Demo version — limited to ~10% of full content</span>
+    `;
+  }
+}
+
+function setFilter(f) {
+  currentFilter = f;
+  render();
+}
+
+// Section icons mapping
+const SECTION_ICONS = {
+  hooks: '🪝',
+  prompts: '🤖',
+  scripts: '🎬',
+  ideas: '💡',
+  hashtags: '#',
+  formulas: '📝',
+  bios: '📱',
+  captions: '✍️',
+  ctas: '📣',
+  ai_tool_guide: '🤖'
+};
+
+function setSection(s) {
+  if (!s || !SECTIONS[s]) return; // guard against undefined / invalid sections
+  currentSection = s;
+  currentFilter = 'all';
+  searchTerm = '';
+  document.getElementById('searchInput').value = '';
+  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+  const navBtn = document.querySelector(`[data-section="${s}"]`);
+  if (navBtn) navBtn.classList.add('active');
+  // Update section info banner with description
+  const banner = document.getElementById('sectionInfoBanner');
+  const iconEl = document.getElementById('sectionInfoIcon');
+  const contentEl = document.getElementById('sectionInfoContent');
+  if (banner && contentEl && SECTIONS[s] && SECTIONS[s].description) {
+    iconEl.textContent = SECTION_ICONS[s] || '💡';
+    contentEl.innerHTML = SECTIONS[s].description;
+    banner.style.display = 'flex';
+  } else if (banner) {
+    banner.style.display = 'none';
+  }
+  render();
+  if (window.innerWidth <= 768) toggleSidebar(false);
+}
+
+function copyItem(btn, text) {
+  copyToClipboard(text).then(() => {
+    btn.classList.add('copied');
+    btn.textContent = '✓ Copied!';
+    showToast('Copied to clipboard');
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.textContent = 'Copy';
+    }, 2000);
+  }).catch(() => showToast('Copy failed - try long-press'));
+}
+
+// ============ UNIVERSAL CLIPBOARD FUNCTION (works on mobile + desktop + file://) ============
+function copyToClipboard(text) {
+  return new Promise((resolve, reject) => {
+    if (navigator.clipboard && navigator.clipboard.writeText && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(resolve).catch(() => {
+        fallbackCopy(text, resolve, reject);
+      });
+    } else {
+      fallbackCopy(text, resolve, reject);
+    }
+  });
+}
+
+function fallbackCopy(text, resolve, reject) {
+  try {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.setAttribute('readonly', '');
+    textarea.setAttribute('inputmode', 'none');
+    textarea.style.position = 'fixed';
+    textarea.style.left = '-9999px';
+    textarea.style.top = '0';
+    textarea.style.width = '2em';
+    textarea.style.height = '2em';
+    textarea.style.padding = '0';
+    textarea.style.border = 'none';
+    textarea.style.outline = 'none';
+    textarea.style.boxShadow = 'none';
+    textarea.style.background = 'transparent';
+    textarea.style.fontSize = '16px';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    textarea.setSelectionRange(0, text.length);
+    const successful = document.execCommand('copy');
+    document.body.removeChild(textarea);
+    if (successful) {
+      resolve();
+    } else {
+      reject(new Error('execCommand copy failed'));
+    }
+  } catch (err) {
+    reject(err);
+  }
+}
+
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2000);
+}
+
+// ============ LOCKED SECTION MODAL ============
+const LOCKED_ICON_SVGS = {
+  chart: '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="4" height="10"/><rect x="10" y="6" width="4" height="14"/><rect x="16" y="13" width="4" height="7"/></svg>',
+  clock: '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg>',
+  calendar: '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg>',
+  music: '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>',
+  warning: '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 20h20L12 3z"/><line x1="12" y1="10" x2="12" y2="14"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+  cart: '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h2l2.6 12.6a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L21 7H5.2"/></svg>',
+  search: '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="20" y1="20" x2="15.5" y2="15.5"/></svg>',
+  camera: '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3"/></svg>',
+  megaphone: '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4a1 1 0 0 0 1 1h2l4 4V5L6 9H4a1 1 0 0 0-1 1z"/><path d="M15 8a4 4 0 0 1 0 8"/><path d="M18 5a8 8 0 0 1 0 14"/></svg>',
+  lightning: '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 11 14 10 22 21 10 13 10 13 2"/></svg>',
+  pencil: '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
+};
+function showLockedSection(title, icon, description) {
+  const modal = document.getElementById('lockedModal');
+  document.getElementById('lockedModalTitle').textContent = title;
+  document.getElementById('lockedModalIcon').innerHTML = LOCKED_ICON_SVGS[icon] || '';
+  document.getElementById('lockedModalPreviewText').textContent = description;
+  modal.classList.add('show');
+}
+function closeLockedModal() {
+  document.getElementById('lockedModal').classList.remove('show');
+}
+
+function escapeHtml(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+// ============ FIXED COLOR MAPPING PER CATEGORY ============
+const CATEGORY_COLOR_MAP = {
+  // Hooks (6 categories)
+  'curiosity': 'pink',
+  'contrarian': 'gold',
+  'list': 'green',
+  'story': 'purple',
+  'problem': 'cyan',
+  'shocking': 'pink',
+
+  // AI Prompts (9 categories)
+  'idea_generation': 'pink',
+  'script_writing': 'cyan',
+  'hook_creation': 'gold',
+  'caption_writing': 'green',
+  'hashtag_research': 'purple',
+  'trend_analysis': 'pink',
+  'bio_optimization': 'cyan',
+  'cta_creation': 'gold',
+  'storytelling': 'green',
+
+  // Content Ideas (6 categories)
+  'trend_jacking': 'pink',
+  'educational': 'cyan',
+  'behind_the_scenes': 'gold',
+  'listicle': 'purple',
+  'controversial': 'pink',
+
+  // Hashtag Niches (10)
+  'business': 'pink',
+  'fitness': 'cyan',
+  'food': 'gold',
+  'fashion': 'purple',
+  'education': 'green',
+  'tech': 'pink',
+  'travel': 'cyan',
+  'finance': 'gold',
+  'lifestyle': 'purple',
+  'motivation': 'green',
+
+  // Script Types (6)
+  'product_review': 'gold',
+  'tutorial': 'green',
+  'motivational': 'cyan',
+
+  // Bio Types (5)
+  'personal_brand': 'cyan',
+  'creator': 'gold',
+  'local_business': 'green',
+  'coach': 'purple',
+
+  // Title Formula Types (6)
+  'number-based': 'pink',
+  'how-to': 'cyan',
+  'question-based': 'gold',
+  'mistake-based': 'green',
+  'comparison': 'purple',
+  'story-based': 'pink',
+
+  // Caption Types (5)
+  'promotional': 'gold',
+  'engagement': 'green',
+  'trending': 'pink',
+};
+
+function getCategoryColor(category) {
+  if (!category) return 'pink';
+  const cat = String(category).toLowerCase().trim().replace(/\s+/g, '_');
+  return CATEGORY_COLOR_MAP[cat] || 'pink';
+}
+
+function toggleSidebar(force) {
+  const sb = document.getElementById('sidebar');
+  const ov = document.getElementById('overlay');
+  if (force === false) {
+    sb.classList.remove('open');
+    ov.classList.remove('show');
+  } else {
+    sb.classList.toggle('open');
+    ov.classList.toggle('show');
+  }
+  // Once the visitor opens the menu, stop drawing attention to it — it's done its job
+  if (sb.classList.contains('open')) {
+    document.querySelectorAll('.mobile-menu-btn').forEach(btn => btn.classList.add('menu-btn-seen'));
+    const hint = document.getElementById('menuHint');
+    if (hint) hint.classList.add('hide');
+  }
+}
+
+// ============ EVENT LISTENERS ============
+document.querySelectorAll('.nav-item').forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Locked items use onclick="showLockedSection(...)" instead — skip them
+    if (!btn.dataset.section) return;
+    setSection(btn.dataset.section);
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+});
+
+document.getElementById('searchInput').addEventListener('input', e => {
+  searchTerm = e.target.value;
+  renderContent();
+});
+
+// Init
+setSection('hooks');
+
+// ============ TIMED UPGRADE MODAL ============
+// Auto-popup fires once after 30s. If the visitor dismisses it, it will NOT
+// force itself open again this session — manual clicks (bonus banner, locked
+// items) always still open it on demand.
+let modalDismissedByUser = false;
+function openUpgradeModal() {
+  const modal = document.getElementById('upgradeModal');
+  if (modal) modal.classList.add('show');
+}
+function showUpgradeModal() {
+  // Manual trigger (bonus banner / sticky bar) — always opens.
+  openUpgradeModal();
+}
+function autoShowUpgradeModal() {
+  // Timer-based trigger — respects a prior dismissal.
+  if (modalDismissedByUser) return;
+  openUpgradeModal();
+}
+function closeUpgradeModal() {
+  document.getElementById('upgradeModal').classList.remove('show');
+  modalDismissedByUser = true;
+}
+// Trigger after 30 seconds (auto-popup only fires if not already dismissed)
+setTimeout(autoShowUpgradeModal, 30000);
+</script>
+
+<!-- ============ ABOUT CREATOR + SOCIAL PROOF + FAQ ============ -->
+<style>
+.info-section {
+  max-width: 1100px;
+  margin: 60px auto 40px;
+  padding: 0 24px;
+}
+.info-section h2.section-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+.info-section p.section-sub {
+  text-align: center;
+  color: #a1a1aa;
+  font-size: 14.5px;
+  margin-bottom: 36px;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* About Creator */
+.creator-card {
+  background: linear-gradient(135deg, rgba(254,44,85,0.05), rgba(37,244,238,0.04));
+  border: 1px solid #27272a;
+  border-radius: 20px;
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 24px;
+  align-items: center;
+}
+.creator-avatar {
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FE2C55, #25F4EE);
+  display: grid; place-items: center;
+  font-size: 44px; font-weight: 800; color: #fff;
+  letter-spacing: -1px;
+  box-shadow: 0 8px 24px rgba(254,44,85,0.25);
+  overflow: hidden;
+  padding: 3px;
+}
+.creator-card h3 {
+  color: #fff; font-size: 20px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.01em;
+}
+.creator-card .creator-role {
+  color: #25F4EE; font-size: 13px; font-weight: 600; margin-bottom: 10px;
+}
+.creator-card p {
+  color: #d4d4d8; font-size: 14px; line-height: 1.65; margin-bottom: 12px;
+}
+.creator-stats {
+  display: flex; gap: 24px; flex-wrap: wrap;
+  padding-top: 12px; border-top: 1px solid #27272a;
+}
+.creator-stat strong { display: block; color: #FE2C55; font-size: 20px; font-weight: 800; }
+.creator-stat span { color: #71717a; font-size: 12px; }
+
+/* Social proof */
+.proof-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.proof-card {
+  background: #111113;
+  border: 1px solid #27272a;
+  border-radius: 14px;
+  padding: 22px;
+}
+.proof-card .proof-icon { font-size: 28px; margin-bottom: 10px; }
+.proof-card h4 { color: #fff; font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.proof-card p { color: #a1a1aa; font-size: 13px; line-height: 1.55; }
+
+.trust-row {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  padding: 20px; background: #111113; border: 1px solid #27272a; border-radius: 14px;
+}
+.trust-pill {
+  display: flex; align-items: center; gap: 8px;
+  color: #d4d4d8; font-size: 13.5px; font-weight: 500;
+}
+.trust-pill .check { color: #22c55e; font-weight: 800; }
+
+/* FAQ */
+.faq-list { max-width: 760px; margin: 0 auto; }
+.faq-item {
+  background: #111113;
+  border: 1px solid #27272a;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.faq-q {
+  width: 100%;
+  text-align: left;
+  padding: 18px 20px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  font-family: inherit;
+}
+.faq-q .arrow { color: #FE2C55; transition: transform .2s; font-size: 18px; flex-shrink: 0; }
+.faq-q.open .arrow { transform: rotate(45deg); }
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .25s ease, padding .25s ease;
+  padding: 0 20px;
+  color: #a1a1aa;
+  font-size: 13.5px;
+  line-height: 1.65;
+}
+.faq-a.open { max-height: 400px; padding: 0 20px 18px; }
+
+@media (max-width: 720px) {
+  .creator-card { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+  .creator-stats { justify-content: center; }
+  .info-section { padding: 0 14px; }
+}
+</style>
+
+<section class="info-section" id="about">
+  <h2 class="section-title">Meet the Creator</h2>
+  <p class="section-sub">Built by a TikTok creator who actually posts — not a marketer selling theory.</p>
+
+  <div class="creator-card">
+    <div class="creator-avatar"><img src="data:image/jpeg;base64,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" alt="Muhannad Shakweer" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+    <div>
+      <h3>Muhannad Shakweer</h3>
+      <div class="creator-role">TikTok Creator · Content Strategist</div>
+      <p>I built this kit after 2+ years of testing, breaking, and re-engineering what actually works on TikTok. Every hook, prompt, and script in here was used on real videos — not generated in a vacuum.</p>
+      <p>My goal was simple: package everything I've learned into one searchable dashboard so you stop wasting hours scrolling for ideas and start posting content that performs.</p>
+      <div class="creator-stats">
+        <div class="creator-stat"><strong>1,653</strong><span>Curated resources</span></div>
+        <div class="creator-stat"><strong>2+ yrs</strong><span>TikTok experience</span></div>
+        <div class="creator-stat"><strong>2026</strong><span>Fully updated</span></div>
+        <div class="creator-stat"><strong>Lifetime</strong><span>Free updates</span></div>
+      </div>
+      <div style="margin-top:16px;padding-top:16px;border-top:1px solid #27272a;">
+        <p style="color:#71717a;font-size:12.5px;margin-bottom:10px;">Got a question or need help with the kit? Reach out directly — I read every message myself.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a href="https://www.facebook.com/Muhannad.Nightwalker11" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:7px;background:#18181b;border:1px solid #27272a;color:#d4d4d8;padding:8px 14px;border-radius:8px;font-size:12.5px;font-weight:600;text-decoration:none;">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7H7.9V12h2.6V9.8c0-2.6 1.5-4 3.9-4 1.1 0 2.3.2 2.3.2v2.5h-1.3c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.5 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg>
+            Message on Facebook
+          </a>
+          <a href="mailto:mohnad.shakweer@hotmail.com" style="display:inline-flex;align-items:center;gap:7px;background:#18181b;border:1px solid #27272a;color:#d4d4d8;padding:8px 14px;border-radius:8px;font-size:12.5px;font-weight:600;text-decoration:none;">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            mohnad.shakweer@hotmail.com
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="info-section" id="proof">
+  <h2 class="section-title">Why this kit actually works</h2>
+  <p class="section-sub">This isn't a random dump of templates. It's a system built around how the TikTok algorithm actually pushes content in 2026.</p>
+
+  <div class="proof-grid">
+    <div class="proof-card">
+      <div class="proof-icon">🪝</div>
+      <h4>Built on real hook testing</h4>
+      <p>302 hooks organized by the 6 psychological triggers that stop scrolls. Each one modeled after patterns that performed on real TikTok videos.</p>
+    </div>
+    <div class="proof-card">
+      <div class="proof-icon">📊</div>
+      <h4>Aligned with the 2026 algorithm</h4>
+      <p>The included Algorithm Cheatsheet explains the signals TikTok now weights — watch time, completion, replays, saves, shares — and how to engineer them.</p>
+    </div>
+    <div class="proof-card">
+      <div class="proof-icon">🤖</div>
+      <h4>Tested with every major AI</h4>
+      <p>All 150 AI prompts work with ChatGPT, Claude, Gemini, DeepSeek, Copilot, and Grok — verified output, not generic "write me a TikTok" requests.</p>
+    </div>
+    <div class="proof-card">
+      <div class="proof-icon">🎯</div>
+      <h4>Niche-agnostic by design</h4>
+      <p>Scripts, ideas, and captions adapt to any niche — fitness, finance, gaming, beauty, faceless, B2B. Pick a template, swap the topic, post.</p>
+    </div>
+    <div class="proof-card">
+      <div class="proof-icon">⏱️</div>
+      <h4>Built for speed, not scrolling</h4>
+      <p>No more digging through a 20-minute YouTube video for one hook idea. Search, copy, paste, post — the whole idea-to-caption gap shrinks to minutes.</p>
+    </div>
+  </div>
+
+  <div class="trust-row">
+    <div class="trust-pill"><span class="check">✓</span> Instant delivery</div>
+    <div class="trust-pill"><span class="check">✓</span> Works on mobile &amp; desktop</div>
+    <div class="trust-pill"><span class="check">✓</span> Lifetime free updates</div>
+    <div class="trust-pill"><span class="check">✓</span> Pay once, own forever</div>
+    <div class="trust-pill"><span class="check">✓</span> Secure checkout via Gumroad</div>
+  </div>
+
+  <!-- Mobile-experience mockup: mainly for desktop visitors to see it works well on phones too -->
+  <style>
+    .mobile-showcase {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      background: #111113;
+      border: 1px solid #27272a;
+      border-radius: 16px;
+      padding: 28px;
+      margin-top: 20px;
+    }
+    .phone-frame {
+      flex-shrink: 0;
+      width: 180px;
+      height: 368px;
+      background: #000;
+      border-radius: 28px;
+      padding: 8px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 0 1px #27272a;
+    }
+    .phone-screen {
+      width: 100%; height: 100%;
+      background: #0a0a0b;
+      border-radius: 20px;
+      overflow: hidden;
+      padding: 10px 8px;
+      position: relative;
+    }
+    .phone-notch {
+      position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+      width: 50px; height: 5px; background: #27272a; border-radius: 999px;
+    }
+    .phone-mini-card {
+      background: #18181b; border: 1px solid #27272a; border-radius: 8px;
+      padding: 8px 9px; margin-bottom: 7px; margin-top: 14px;
+    }
+    .phone-mini-card .pmc-tag {
+      display: inline-block; font-size: 7px; font-weight: 700; padding: 2px 6px;
+      border-radius: 999px; background: rgba(254,44,85,0.2); color: #FE2C55; margin-bottom: 5px;
+    }
+    .phone-mini-card .pmc-text { font-size: 8.5px; color: #d4d4d8; line-height: 1.4; }
+    .phone-mini-btn {
+      background: linear-gradient(135deg,#FE2C55,#ff406b); color: #fff; font-size: 8px; font-weight: 700;
+      text-align: center; padding: 6px; border-radius: 6px; margin-top: 10px;
+    }
+    @media (max-width: 900px) { .mobile-showcase { flex-direction: column; text-align: center; } }
+    @media (max-width: 640px) { .mobile-showcase { display: none; } /* redundant — visitor is already on mobile */ }
+  </style>
+  <div class="mobile-showcase">
+    <div class="phone-frame">
+      <div class="phone-screen">
+        <div class="phone-notch"></div>
+        <div class="phone-mini-card">
+          <span class="pmc-tag">CURIOSITY</span>
+          <div class="pmc-text">"The 3rd tip will change how you make TikToks forever..."</div>
+        </div>
+        <div class="phone-mini-card">
+          <span class="pmc-tag">CONTRARIAN</span>
+          <div class="pmc-text">"Stop posting every day. Here's what actually works..."</div>
+        </div>
+        <div class="phone-mini-card">
+          <span class="pmc-tag">STORY</span>
+          <div class="pmc-text">"I went from 0 to 100K followers in 60 days..."</div>
+        </div>
+        <div class="phone-mini-btn">🔓 Unlock Full Kit</div>
+      </div>
+    </div>
+    <div>
+      <h3 style="color:#fff;font-size:19px;font-weight:800;margin-bottom:8px;">Full dashboard, right in your pocket</h3>
+      <p style="color:#a1a1aa;font-size:13.5px;line-height:1.6;max-width:420px;">No app to install. Open the link on your phone between filming takes, search for a hook or caption, copy it, and get back to shooting — the same dashboard you're using right now, resized for one-thumb scrolling.</p>
+    </div>
+  </div>
+</section>
+
+<section class="info-section" id="preview">
+  <h2 class="section-title">See the real quality — no blur, no catch</h2>
+  <p class="section-sub">This is one full signal from the Algorithm Cheatsheet — one of the 5 bonus resources locked in this demo. Unedited, fully unlocked, exactly what you'd get.</p>
+
+  <div style="background:#111113;border:1px solid #27272a;border-radius:14px;padding:22px 24px;max-width:640px;margin:0 auto;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg, rgba(254,44,85,0.16), rgba(37,244,238,0.1));color:#FE2C55;flex-shrink:0;">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="4" height="10"/><rect x="10" y="6" width="4" height="14"/><rect x="16" y="13" width="4" height="7"/></svg>
+      </span>
+      <div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.08em;color:#22c55e;">✓ FULLY UNLOCKED — SIGNAL 1 OF 8</div>
+        <h3 style="color:#fff;font-size:16px;font-weight:800;margin:2px 0 0;">The 4 Key Signals (Ranked by Importance)</h3>
+      </div>
+    </div>
+    <div style="font-size:13.5px;color:#d4d4d8;line-height:1.75;white-space:pre-line;">TikTok's algorithm prioritizes 4 signals:
+
+1. COMPLETION RATE (most important) — What % of viewers watch your full video. Aim for 70%+ on videos under 30s, 50%+ on longer videos.
+
+2. ENGAGEMENT — Likes, comments, shares, saves. Comments and shares carry more weight than likes.
+
+3. FOLLOWER INTERACTION — If a viewer's friends engage with your video, it gets pushed to more people.
+
+4. ACCOUNT SIGNALS — Your past performance, consistency, and content quality history.
+
+PRO TIP: Optimize for completion rate first. If viewers don't finish your video, nothing else matters.</div>
+  </div>
+
+  <p style="text-align:center;color:#71717a;font-size:12.5px;margin-top:14px;">This is 1 of <strong style="color:#fff;">8 signals</strong> in the Algorithm Cheatsheet alone — plus 12 more bonus resources just like it in the Full Kit.</p>
+  <div style="text-align:center;margin-top:16px;">
+    <button onclick="showUpgradeModal();" style="background:linear-gradient(135deg,#FE2C55,#ff406b);color:#fff;padding:12px 22px;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">🔥 Unlock the rest — $18.00 →</button>
+  </div>
+</section>
+
+<section class="info-section" id="faq">
+  <h2 class="section-title">Frequently Asked Questions</h2>
+  <p class="section-sub">Everything you need to know before you unlock the full kit.</p>
+
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>What exactly do I get after I pay?</span><span class="arrow">+</span></button>
+      <div class="faq-a"><p>You instantly get the full interactive dashboard with all 1,653 resources — hooks, AI prompts, scripts, ideas, hashtags, captions, the algorithm cheatsheet, the 30-day content calendar, and all 5 bonus resources. Plus the Random Generator and Favorites system. Delivered as a single HTML file that opens in any browser — no install, no login.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>Does it work on mobile?</span><span class="arrow">+</span></button>
+      <div class="faq-a"><p>Yes. The dashboard is fully responsive — works on iPhone, Android, tablet, and desktop. You can search, copy, and use the generator from any device.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>How are the AI prompts different from what I'd write myself?</span><span class="arrow">+</span></button>
+      <div class="faq-a"><p>Each prompt is engineered with role context, output structure, tone, and constraints — so the AI returns a usable TikTok asset, not generic fluff. They've been tested across ChatGPT, Claude, Gemini, DeepSeek, Copilot, and Grok to ensure consistent results.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>What if my niche isn't covered?</span><span class="arrow">+</span></button>
+      <div class="faq-a"><p>Every resource is niche-agnostic by design. The hooks, scripts, and ideas use proven frameworks that adapt to your topic. Just plug in your niche — fitness, finance, beauty, gaming, faceless, B2B, education — and the same template works.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>How fast can I start using it?</span><span class="arrow">+</span></button>
+      <div class="faq-a"><p>Instantly. The moment your payment goes through, Gumroad emails you the download link. Open the file in any browser — no install, no login — and you're ready to plan your next TikTok within 5 minutes.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>How is this different from free TikTok advice on YouTube?</span><span class="arrow">+</span></button>
+      <div class="faq-a"><p>YouTube gives you theory. This gives you a searchable, copy-paste library of 1,653 ready-to-use assets. No 20-minute video to find one hook — just open the dashboard, search, copy, post.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>Do I get future updates?</span><span class="arrow">+</span></button>
+      <div class="faq-a"><p>Yes — lifetime updates are included free. As TikTok's algorithm and trends shift, the kit gets updated and you'll receive an email with the new version. No subscription, no extra fees.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>Is the payment secure?</span><span class="arrow">+</span></button>
+      <div class="faq-a"><p>Yes. Checkout is handled by Gumroad — a trusted platform that processes millions of dollars in digital product sales. Your card details never touch my server.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>How do I contact the creator?</span><span class="arrow">+</span></button>
+      <div class="faq-a"><p>I read every message myself — reach out on <a href="https://www.facebook.com/Muhannad.Nightwalker11" target="_blank" rel="noopener noreferrer" style="color:#25F4EE;">Facebook</a> or email <a href="mailto:mohnad.shakweer@hotmail.com" style="color:#25F4EE;">mohnad.shakweer@hotmail.com</a> and I'll get back to you.</p></div>
+    </div>
+  </div>
+</section>
+
+<script>
+function toggleFaq(btn) {
+  const ans = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  // close all
+  document.querySelectorAll('.faq-q').forEach(q => q.classList.remove('open'));
+  document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+  if (!isOpen) { btn.classList.add('open'); ans.classList.add('open'); }
+}
+</script>
+
+<style>
+#scrollTopBtn {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FE2C55, #25F4EE);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(254,44,85,0.35);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(12px);
+  transition: opacity .2s ease, transform .2s ease, visibility .2s;
+  z-index: 250;
+}
+#scrollTopBtn.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+#scrollTopBtn:hover { filter: brightness(1.1); }
+@media (max-width: 720px) {
+  #scrollTopBtn { bottom: 84px; width: 42px; height: 42px; }
+}
+</style>
+
+<button id="scrollTopBtn" onclick="scrollToSearch()" aria-label="Back to search">
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+</button>
+
+<script>
+// Jump back to the search bar (not just the blank top of the page) so the visitor can search right away
+function scrollToSearch() {
+  if (window.innerWidth <= 768) {
+    const sb = document.getElementById('sidebar');
+    if (sb && !sb.classList.contains('open')) toggleSidebar();
+  }
+  const input = document.getElementById('searchInput');
+  if (input) {
+    input.scrollIntoView({behavior: 'smooth', block: 'center'});
+    setTimeout(() => input.focus(), 350);
+  } else {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+}
+(function() {
+  const btn = document.getElementById('scrollTopBtn');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) {
+      btn.classList.add('show');
+    } else {
+      btn.classList.remove('show');
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
